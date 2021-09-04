@@ -5,6 +5,7 @@ import Skills from '../components/Skills';
 import Project1 from '../components/Project1';
 import Project2 from '../components/Project2';
 import Contact from '../components/Contact';
+import ProjectDetails from '../components/ProjectDetails';
 
 // markup
 const IndexPage = () => {
@@ -16,6 +17,7 @@ const IndexPage = () => {
 			<Project2 />
 			<Project1 />
 			<Contact />
+			{/* <ProjectDetails /> */}
 		</React.Fragment>
 	);
 };
