@@ -16,6 +16,8 @@ const Background = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+
+	scroll-snap-align: start;
 `;
 
 const DescriptionDiv = styled.div`
@@ -97,13 +99,117 @@ const BackPolygon = styled(motion.div)`
 	clip-path: polygon(5.5% 0, 100% 0, 100% 100%, 0 100%);
 	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
 `;
+const TrackContainer = styled(motion.div)`
+position: absolute;
+	top: 0;
+	right:0;
+	display: flex;
+	transform: rotate(-10deg);
+`;
+const TopTrack = styled(motion.div)`
+	position: absolute;
+	top: 5vh;
+	right: 0;
+	border: 2px dashed rgba(122, 138, 128, 1);
+	width: 28vw;
+    
+`;
+const MidTrack = styled(motion.div)`
+	position: absolute; 
+	top: 5vh;
+	right: calc(28vw + 4px);
+	border: 2px dashed rgba(122, 138, 128, 1);
+	height: 35vw;
+    
+`;
+const BotTrack = styled(motion.div)`
+	position: absolute;
+	top: calc(5vh + 35vw);
+	right: calc(28vw + 8px);
+	border: 2px dashed rgba(122, 138, 128, 1);
+	width: 8vw;
+`;
 
-const Project1 = () => {
+const LMarksTheSpot = styled(motion.div)`
+	position: absolute;
+	top: calc(5vh + 35vw);
+	right: calc(35vw + 8px);
+	border: 4px solid rgba(122, 138, 128, 1);
+	width: 6vw;
+	transform-origin: center;
+	transform:rotate(45deg);
+`;
+const RMarksTheSpot = styled(motion.div)`
+	position: absolute;
+	top: calc(5vh + 35vw);
+	right: calc(35vw + 8px);
+	border: 4px solid rgba(122, 138, 128, 1);
+	width: 6vw;
+	transform-origin: center;
+	transform:rotate(-45deg);
+`;
+
+const Project1 = ({ project1Animate }) => {
+	const controlTopTrack = useAnimation();
+	const controlMidTrack = useAnimation();
+	const controlBotTrack = useAnimation();
+	const controlLSpot = useAnimation();
+	const controlRSpot = useAnimation();
+
 	const controlTitle = useAnimation();
 	const controlDescription = useAnimation();
 	const controlBackPoly = useAnimation();
 	const controlMidPoly = useAnimation();
 	const controlForePoly = useAnimation();
+
+	const trailAnimateSeq = async () => {
+		await controlTopTrack.start({
+			width: '28vw',
+			opacity: 1,
+			transition: { type: 'tween', duration: 2 }
+		});
+		await controlMidTrack.start({
+			height: '35vw',
+			opacity: 1,
+			transition: { type: 'tween', duration: 2 }
+		});
+		await controlBotTrack.start({
+			width: '8vw',
+			opacity: 1,
+			transition: { type: 'tween', duration: 2 }
+		});
+		controlLSpot.start({
+			opacity: 1,
+			scale: 1,
+			rotate: 45,
+			transition: { duration: 2 }
+		});
+		await controlRSpot.start({
+			opacity: 1,
+			scale: 1,
+			rotate: -45,
+			transition: { duration: 2 }
+		});
+		await controlTopTrack.start({
+			opacity: 0,
+			transitionEnd: { width: 0 }
+		});
+		await controlMidTrack.start({
+			opacity: 0,
+			transitionEnd: { height: 0 }
+		});
+		await controlBotTrack.start({
+			opacity: 0,
+			transitionEnd: { width: 0 }
+		});
+		controlLSpot.start({
+			opacity: 0
+		});
+		await controlRSpot.start({
+			opacity: 0
+		});
+		trailAnimateSeq();
+	};
 
 	const polyAnimateSeq = () => {
 		controlBackPoly.start({
@@ -124,19 +230,33 @@ const Project1 = () => {
 			x: [ 700, 700, 0 ],
 			scale: [ 1.5, 1.5, 1 ],
 			opacity: [ 0, 1, 1 ],
-			transition: { duration: 4, times: [ 0, 0.65, 1 ] }
+			transition: { duration: 2, times: [ 0, 0.65, 1 ] }
 		});
 		controlDescription.start({
 			opacity: 1
 		});
 		polyAnimateSeq();
+		trailAnimateSeq();
 	};
-	useEffect(() => {
-		allAnimateSeq();
-	}, []);
+	useEffect(
+		() => {
+			if (project1Animate) {
+				allAnimateSeq();
+				console.log('ofcourse');
+			}
+		},
+		[ project1Animate ]
+	);
 	return (
 		<Layout>
-			<Background>
+			<Background className="Project1">
+				<TrackContainer>
+					<TopTrack animate={controlTopTrack} initial={{ width: 0 }} />
+					<MidTrack animate={controlMidTrack} initial={{ height: 0 }} />
+					<BotTrack animate={controlBotTrack} initial={{ width: 0 }} />
+					<LMarksTheSpot animate={controlLSpot} initial={{ scale: 0, rotate: 45 }} />
+					<RMarksTheSpot animate={controlRSpot} initial={{ scale: 0, rotate: -45 }} />
+				</TrackContainer>
 				<DescriptionDiv>
 					<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
 						Project Name
