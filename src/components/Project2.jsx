@@ -16,6 +16,7 @@ const Background = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	scroll-snap-align: start;
 `;
 
 const DescriptionDiv = styled.div`
@@ -113,21 +114,61 @@ const BackPolygon = styled(motion.div)`
 	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
 `;
 
-const Project2 = () => {
+const Project2 = ({ project2Animate }) => {
 	const controlTitle = useAnimation();
 	const controlDescription = useAnimation();
+	const controlBackPoly = useAnimation();
+	const controlMidPoly = useAnimation();
+	const controlForePoly = useAnimation();
+	const polyAnimateSeq = () => {
+		controlBackPoly.start({
+			x: 0,
+			transition: { type: 'spring', mass: 1, damping: 14 }
+		});
+		controlMidPoly.start({
+			x: 0,
+			transition: { type: 'spring', mass: 1, damping: 14, delay: 0.25 }
+		});
+		controlForePoly.start({
+			x: 0,
+			transition: { type: 'spring', mass: 1, damping: 14, delay: 0.5 }
+		});
+	};
+	const allAnimateSeq = async () => {
+		await controlTitle.start({
+			x: [ -700, -700, 0 ],
+			scale: [ 1.5, 1.5, 1 ],
+			opacity: [ 0, 1, 1 ],
+			transition: { duration: 2, times: [ 0, 0.65, 1 ] }
+		});
+		controlDescription.start({
+			opacity: 1
+		});
+		polyAnimateSeq();
+	};
+	useEffect(
+		() => {
+			if (project2Animate) {
+				console.log('hello');
+				allAnimateSeq();
+			}
+		},
+		[ project2Animate ]
+	);
 	return (
 		<Layout>
-			<Background>
+			<Background className="Project2">
 				<DescriptionDiv>
-					<ProjectTitle>Project Name</ProjectTitle>
-					<ProjectDescription>
+					<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
+						Project Name
+					</ProjectTitle>
+					<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, ab ea magnam ipsam hic at ut
 						modi doloremque corporis nam? <br />
 						<br />
 						More Details &rarr;
 					</ProjectDescription>
-					<ButtonDiv>
+					<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
 						<LiveButton />
 						<GitButton>
 							<ButtonText>GITHUB</ButtonText>
@@ -137,32 +178,32 @@ const Project2 = () => {
 				</DescriptionDiv>
 				<BackPolygonShadowWrap>
 					<BackPolygon
-					// whileHover={{
-					// 	scale: 1.05,
-					// 	transition: { type: 'spring', mass: 1 }
-					// }}
-					// animate={controlBackPoly}
-					// initial={{ x: 1100 }}
+						whileHover={{
+							scale: 1.05,
+							transition: { type: 'spring', mass: 1 }
+						}}
+						animate={controlBackPoly}
+						initial={{ x: -1100 }}
 					/>
 				</BackPolygonShadowWrap>
 				<MidPolygonShadowWrap>
 					<MidPolygon
-					// whileHover={{
-					// 	scale: 1.05,
-					// 	transition: { type: 'spring', mass: 1 }
-					// }}
-					// animate={controlMidPoly}
-					// initial={{ x: 1100 }}
+						whileHover={{
+							scale: 1.05,
+							transition: { type: 'spring', mass: 1 }
+						}}
+						animate={controlMidPoly}
+						initial={{ x: -1100 }}
 					/>
 				</MidPolygonShadowWrap>
 				<ForePolygonShadowWrap>
 					<ForePolygon
-					// whileHover={{
-					// 	scale: 1.05,
-					// 	transition: { type: 'spring', mass: 1 }
-					// }}
-					// animate={controlForePoly}
-					// initial={{ x: 1100 }}
+						whileHover={{
+							scale: 1.05,
+							transition: { type: 'spring', mass: 1 }
+						}}
+						animate={controlForePoly}
+						initial={{ x: -1100 }}
 					>
 						<StaticImage height={450} src="../images/TripPlannerLaptop.png" alt="website" />
 					</ForePolygon>

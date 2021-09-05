@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import styled from 'styled-components';
 import { Canvas, extend, useThree, useFrame } from '@react-three/fiber';
 import SpriteText from 'three-spritetext';
 import Layout from './Layout';
-import { OrbitControls, TrackballControls } from '@react-three/drei';
 extend({ SpriteText });
 
 const Background = styled.div`
@@ -14,8 +14,9 @@ const Background = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	scroll-snap-align: start;
 `;
-const HalfDiv = styled.div`
+const HalfDiv = styled(motion.div)`
 	padding: 1rem;
 	margin: 1rem;
 	flex-basis: 50%;
@@ -25,7 +26,7 @@ const HalfDiv = styled.div`
 	justify-content: center;
 `;
 
-const CanvasDiv = styled.div`
+const CanvasDiv = styled(motion.div)`
 	flex-basis: 50%;
 	height: 100%;
 	/* background-color: green; */
@@ -88,20 +89,41 @@ const ThreeHook = () => {
 	return <React.Fragment />;
 };
 
-const Skills = () => {
+const Skills = ({ skillsAnimate }) => {
+	const controlDescription = useAnimation();
+	const controlCanvas = useAnimation();
+
+	const allAnimate = async () => {
+		await controlDescription.start({
+			x: 0,
+			transition: { type: 'spring', duration: 1.5 }
+		});
+		controlCanvas.start({
+			x: 0,
+			opacity: 1,
+			transition: { type: 'spring', duration: 0.5 }
+		});
+	};
+	useEffect(
+		() => {
+			if (skillsAnimate) {
+				allAnimate();
+			}
+		},
+		[ skillsAnimate ]
+	);
 	return (
 		<Layout>
-			<Background>
-				<HalfDiv>
+			<Background className="Skills">
+				<HalfDiv animate={controlDescription} initial={{ x: -800 }}>
 					<MainHeading>
 						Here are some of the <AccentSpan>languages</AccentSpan> and{' '}
 						<AccentSpan>technologies</AccentSpan> I've used before.
 					</MainHeading>
 				</HalfDiv>
-				<CanvasDiv>
+				<CanvasDiv animate={controlCanvas} initial={{ x: 700, opacity: 0 }}>
 					<Canvas linear={true}>
 						<ThreeHook />
-						{/* <TrackballControls rotateSpeed={5} noPan={true} /> */}
 
 						<group name="TextSphere">
 							{listOfVertices.map((coords, i) => {

@@ -14,6 +14,7 @@ const Background = styled.div`
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	scroll-snap-align: start;
 `;
 
 const StyledTriangle = styled(Triangle)`
