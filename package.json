@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@fontsource/roboto": "^4.5.0",
+    "@loadable/component": "^5.15.0",
     "@react-three/drei": "^7.6.1",
     "@react-three/fiber": "^7.0.6",
     "babel-plugin-styled-components": "^1.13.2",

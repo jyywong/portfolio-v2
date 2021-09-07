@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { StaticImage } from 'gatsby-plugin-image';
 import TrailClean from '../assets/trailClean.svg';
+import MaskTrail from '../assets/maskTrail.svg';
 
 import Layout from './Layout';
 import styled, { keyframes } from 'styled-components';
@@ -13,7 +14,7 @@ const Background = styled.div`
 	width: 100vw;
 	height: 100vh;
 	background-color: #1d3557;
-
+	overflow: hidden;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
@@ -21,21 +22,62 @@ const Background = styled.div`
 	scroll-snap-align: start;
 `;
 const TrailAnimation = keyframes`
+	0%{
+		stroke-dashoffset: 482.44683837890625;
+		/* opacity: 1; */
+	}
+	80%{
+		stroke-dashoffset: 0;
+		opacity: 1;
+	}
 	100%{
-		stroke-dasharray: 0;
+		stroke-dashoffset: 0;
+		opacity:0;
 	}
 `;
 
-const StyledTrail = styled(TrailClean)`
+const XAnimation = keyframes`
+80%{
+	opacity:0;
+}
+90%{
+	opacity: 1;
+
+}
+100%{
+	opacity:0;
+}
+`;
+
+const StyledTrail = styled(MaskTrail)`
 	position: absolute;
-	right: 0;
+	/* right: 0; */
+	transform-origin: 0% 0%;
+	left: ${(props) => props.mouseposition.x}px;
+	top: calc(${(props) => props.mouseposition.y}px - 62vh);
+	z-index:2;
+	opacity:.25;
+
 	width:60%;
-
-	.mainTrail{
-		fill:none;
-		stroke: black;
-		stroke-dasharray: 482.44683837890625;
-
+	stroke: #457b9d;
+	.paths {
+	fill: none;
+	stroke: #457b9d;
+	stroke-width: 5;
+	stroke-dasharray: 24;
+	stroke-linejoin: round;
+	}
+	.mask {
+	fill: none;
+	stroke: white;
+	stroke-width: 10;
+	stroke-dasharray: 482;
+	stroke-dashoffset: 482.44683837890625;
+	animation:${TrailAnimation} 6s linear  infinite;
+	}
+	.spot{
+	opacity: 0;
+	animation: ${XAnimation} 6s linear infinite;
 	}
 `;
 
@@ -48,11 +90,14 @@ const DescriptionDiv = styled.div`
 	justify-content: center;
 	text-align: left;
 	padding-left: 8rem;
+	z-index: 10;
 `;
 
 const ProjectTitle = styled(motion.h1)`
 	font-size: 10rem;
 	color: white;
+	z-index:10;
+
 `;
 const ProjectDescription = styled(motion.h4)`
 	font-size: 2.5rem;
@@ -70,6 +115,7 @@ const ForePolygonShadowWrap = styled.span`
 	right: -5rem;
 	top: 22.5vh;
 	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
+	z-index: 100;
 `;
 
 const ForePolygon = styled(motion.div)`
@@ -89,6 +135,7 @@ const MidPolygonShadowWrap = styled.span`
 	right: -5rem;
 	top: 27.5vh;
 	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
+	z-index: 100;
 `;
 
 const MidPolygon = styled(motion.div)`
@@ -107,6 +154,8 @@ const BackPolygonShadowWrap = styled(motion.span)`
 	right: -5rem;
     top: 45.5vh;
 	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
+	z-index:100;
+
 `;
 
 const BackPolygon = styled(motion.div)`
@@ -169,66 +218,14 @@ const RMarksTheSpot = styled(motion.div)`
 `;
 
 const Project1 = ({ project1Animate }) => {
-	const controlTopTrack = useAnimation();
-	const controlMidTrack = useAnimation();
-	const controlBotTrack = useAnimation();
-	const controlLSpot = useAnimation();
-	const controlRSpot = useAnimation();
+	const [ mousePosition, setMousePosition ] = useState({ x: 0, y: 0 });
+	const [ animationCoords, setAnimationCoords ] = useState({ x: 500, y: 300 });
 
 	const controlTitle = useAnimation();
 	const controlDescription = useAnimation();
 	const controlBackPoly = useAnimation();
 	const controlMidPoly = useAnimation();
 	const controlForePoly = useAnimation();
-
-	const trailAnimateSeq = async () => {
-		await controlTopTrack.start({
-			width: '28vw',
-			opacity: 1,
-			transition: { type: 'tween', duration: 2 }
-		});
-		await controlMidTrack.start({
-			height: '35vw',
-			opacity: 1,
-			transition: { type: 'tween', duration: 2 }
-		});
-		await controlBotTrack.start({
-			width: '8vw',
-			opacity: 1,
-			transition: { type: 'tween', duration: 2 }
-		});
-		controlLSpot.start({
-			opacity: 1,
-			scale: 1,
-			rotate: 45,
-			transition: { duration: 2 }
-		});
-		await controlRSpot.start({
-			opacity: 1,
-			scale: 1,
-			rotate: -45,
-			transition: { duration: 2 }
-		});
-		await controlTopTrack.start({
-			opacity: 0,
-			transitionEnd: { width: 0 }
-		});
-		await controlMidTrack.start({
-			opacity: 0,
-			transitionEnd: { height: 0 }
-		});
-		await controlBotTrack.start({
-			opacity: 0,
-			transitionEnd: { width: 0 }
-		});
-		controlLSpot.start({
-			opacity: 0
-		});
-		await controlRSpot.start({
-			opacity: 0
-		});
-		trailAnimateSeq();
-	};
 
 	const polyAnimateSeq = () => {
 		controlBackPoly.start({
@@ -255,29 +252,35 @@ const Project1 = ({ project1Animate }) => {
 			opacity: 1
 		});
 		polyAnimateSeq();
-		trailAnimateSeq();
 	};
 	useEffect(
 		() => {
 			if (project1Animate) {
-				// allAnimateSeq();
-				console.log('ofcourse');
+				allAnimateSeq();
 			}
 		},
 		[ project1Animate ]
 	);
+
 	return (
 		<Layout>
-			<Background className="Project1">
-				<StyledTrail />
-				{/* <TrackContainer>
-					<TopTrack animate={controlTopTrack} initial={{ width: 0 }} />
-					<MidTrack animate={controlMidTrack} initial={{ height: 0 }} />
-					<BotTrack animate={controlBotTrack} initial={{ width: 0 }} />
-					<LMarksTheSpot animate={controlLSpot} initial={{ scale: 0, rotate: 45 }} />
-					<RMarksTheSpot animate={controlRSpot} initial={{ scale: 0, rotate: -45 }} />
-				</TrackContainer> */}
-				{/* <DescriptionDiv>
+			<Background
+				className="Project1"
+				onMouseMove={(event) => {
+					setMousePosition({ x: event.clientX, y: event.clientY });
+				}}
+			>
+				<StyledTrail
+					onAnimationIteration={(event) => {
+						if (event.animationName === TrailAnimation.name && mousePosition !== 0) {
+							setAnimationCoords(mousePosition);
+							console.log(animationCoords);
+						}
+					}}
+					mouseposition={animationCoords}
+				/>
+
+				<DescriptionDiv>
 					<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
 						Trip Planner
 					</ProjectTitle>
@@ -323,7 +326,7 @@ const Project1 = ({ project1Animate }) => {
 					>
 						<StaticImage height={450} src="../images/TripPlannerLaptop.png" alt="website" />
 					</ForePolygon>
-				</ForePolygonShadowWrap> */}
+				</ForePolygonShadowWrap>
 			</Background>
 		</Layout>
 	);

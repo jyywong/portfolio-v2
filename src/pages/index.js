@@ -69,12 +69,12 @@ const IndexPage = () => {
 	return (
 		<React.Fragment>
 			<ScrollContainer className="scrollContainer">
-				{/* <Hero /> */}
-				{/* <Skills skillsAnimate={skillsAnimate} /> */}
+				<Hero />
+				<Skills skillsAnimate={skillsAnimate} />
 				<Project1 project1Animate={project1Animate} />
-				{/* <Project2 project2Animate={project2Animate} /> */}
-				{/* <Project3 project3Animate={project3Animate} /> */}
-				{/* <Contact /> */}
+				<Project2 project2Animate={project2Animate} />
+				<Project3 project3Animate={project3Animate} />
+				<Contact />
 				{/* <ProjectDetails /> */}
 			</ScrollContainer>
 		</React.Fragment>
