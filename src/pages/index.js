@@ -9,6 +9,7 @@ import Project1 from '../components/Project1';
 import Project2 from '../components/Project2';
 import Contact from '../components/Contact';
 import ProjectDetails from '../components/ProjectDetails';
+import Project3 from '../components/Project3';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,6 +29,7 @@ const IndexPage = () => {
 	const [ skillsAnimate, setSkillsAnimate ] = useState(false);
 	const [ project1Animate, setProject1Animate ] = useState(false);
 	const [ project2Animate, setProject2Animate ] = useState(false);
+	const [ project3Animate, setProject3Animate ] = useState(false);
 
 	useEffect(() => {
 		ScrollTrigger.create({
@@ -54,6 +56,14 @@ const IndexPage = () => {
 				setProject2Animate(true);
 			}
 		});
+		ScrollTrigger.create({
+			trigger: '.Project3',
+			start: 'top center',
+			id: 'project3',
+			onEnter: () => {
+				setProject3Animate(true);
+			}
+		});
 	}, []);
 
 	return (
@@ -63,7 +73,7 @@ const IndexPage = () => {
 				<Skills skillsAnimate={skillsAnimate} />
 				<Project1 project1Animate={project1Animate} />
 				<Project2 project2Animate={project2Animate} />
-				{/* <Project1 /> */}
+				<Project3 project3Animate={project3Animate} />
 				<Contact />
 				{/* <ProjectDetails /> */}
 			</ScrollContainer>

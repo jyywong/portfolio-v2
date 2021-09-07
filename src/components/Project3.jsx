@@ -1,84 +1,100 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { StaticImage } from 'gatsby-plugin-image';
-import TrailClean from '../assets/trailClean.svg';
-import MaskTrail from '../assets/maskTrail.svg';
-
 import Layout from './Layout';
 import styled, { keyframes } from 'styled-components';
 import LiveButton from './blocks/LiveButton';
 import GithubButton from './blocks/GithubButton';
+import FlyingBook from '../assets/flyingBook.svg';
 
 const Background = styled.div`
 	position: relative;
 	width: 100vw;
 	height: 100vh;
 	background-color: #1d3557;
-	overflow: hidden;
+
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 
 	scroll-snap-align: start;
 `;
-const TrailAnimation = keyframes`
-	0%{
-		stroke-dashoffset: 482.44683837890625;
-		/* opacity: 1; */
-	}
-	80%{
-		stroke-dashoffset: 0;
-		opacity: 1;
-	}
-	100%{
-		stroke-dashoffset: 0;
-		opacity:0;
-	}
-`;
 
-const XAnimation = keyframes`
-80%{
-	opacity:0;
+const topAnimation = keyframes`
+25%{
+	transform:translateY(-20px)
 }
-90%{
-	opacity: 1;
-
+75%{
+	transform:translateY(40px)
 }
 100%{
-	opacity:0;
+	transform:translateY(-20px)
 }
 `;
 
-const StyledTrail = styled(MaskTrail)`
-	position: absolute;
-	/* right: 0; */
-	transform-origin: 0% 0%;
-	left: ${(props) => props.mouseposition.x}px;
-	top: calc(${(props) => props.mouseposition.y}px - 62vh);
-	z-index:2;
-	opacity:.25;
+const midAnimation = keyframes`
+30%{
+	transform:translateY(-20px)
+}
+80%{
+	transform:translateY(40px)
+}
+100%{
+	transform:translateY(-20px)
+}
+`;
+const botAnimation = keyframes`
+20%{
+	transform:translateY(-20px)
+}
+70%{
+	transform:translateY(40px)
+}
+100%{
+	transform:translateY(-20px)
+}
+`;
 
-	width:60%;
-	stroke: #457b9d;
-	.paths {
-	fill: none;
-	stroke: #457b9d;
-	stroke-width: 5;
-	stroke-dasharray: 24;
-	stroke-linejoin: round;
-	}
-	.mask {
-	fill: none;
-	stroke: white;
-	stroke-width: 10;
-	stroke-dasharray: 482;
-	stroke-dashoffset: 482.44683837890625;
-	animation:${TrailAnimation} 6s linear  infinite;
-	}
-	.spot{
-	opacity: 0;
-	animation: ${XAnimation} 6s linear infinite;
-	}
+const bookAnimation = keyframes`
+25%{
+	transform:translateY(50px)
+}
+50%{
+	transform:translateY(0px)
+
+}
+75%{
+	transform:translateY(-50px)
+}
+
+100%{
+	right:100vw
+
+
+}
+
+`;
+
+const StyledBook = styled(FlyingBook)`
+position: absolute;
+right: -20vw;
+height: 20vh;
+width:auto;
+top: calc(${(props) => props.mouseposition}px - 10vh);
+
+animation: ${bookAnimation} infinite 4s ease-out;
+.topLine{
+	animation:${topAnimation} infinite 2s linear;
+	animation-direction: alternate;
+}
+.midLine{
+	animation:${midAnimation} infinite 2s linear;
+	animation-direction: alternate;
+}
+.botLine{
+	animation:${botAnimation} infinite 2s linear;
+	animation-direction: alternate;
+}
 `;
 
 const DescriptionDiv = styled.div`
@@ -90,14 +106,11 @@ const DescriptionDiv = styled.div`
 	justify-content: center;
 	text-align: left;
 	padding-left: 8rem;
-	z-index: 10;
 `;
 
 const ProjectTitle = styled(motion.h1)`
 	font-size: 10rem;
 	color: white;
-	z-index:10;
-
 `;
 const ProjectDescription = styled(motion.h4)`
 	font-size: 2.5rem;
@@ -107,6 +120,7 @@ const ProjectDescription = styled(motion.h4)`
 const ButtonDiv = styled(motion.div)`
 	display: flex;
 	margin-top: 4rem;
+	z-index: 500;
 `;
 
 const ForePolygonShadowWrap = styled.span`
@@ -115,7 +129,6 @@ const ForePolygonShadowWrap = styled.span`
 	right: -5rem;
 	top: 22.5vh;
 	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
-	z-index: 100;
 `;
 
 const ForePolygon = styled(motion.div)`
@@ -135,7 +148,6 @@ const MidPolygonShadowWrap = styled.span`
 	right: -5rem;
 	top: 27.5vh;
 	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
-	z-index: 100;
 `;
 
 const MidPolygon = styled(motion.div)`
@@ -154,8 +166,6 @@ const BackPolygonShadowWrap = styled(motion.span)`
 	right: -5rem;
     top: 45.5vh;
 	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
-	z-index:100;
-
 `;
 
 const BackPolygon = styled(motion.div)`
@@ -167,60 +177,8 @@ const BackPolygon = styled(motion.div)`
 	clip-path: polygon(5.5% 0, 100% 0, 100% 100%, 0 100%);
 	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
 `;
-const TrackContainer = styled(motion.div)`
-position: absolute;
-	top: 0;
-	right:0;
-	display: flex;
-	transform: rotate(-10deg);
-`;
-const TopTrack = styled(motion.div)`
-	position: absolute;
-	top: 5vh;
-	right: 0;
-	border: 2px dashed rgba(122, 138, 128, 1);
-	width: 28vw;
-    
-`;
-const MidTrack = styled(motion.div)`
-	position: absolute; 
-	top: 5vh;
-	right: calc(28vw + 4px);
-	border: 2px dashed rgba(122, 138, 128, 1);
-	height: 35vw;
-    
-`;
-const BotTrack = styled(motion.div)`
-	position: absolute;
-	top: calc(5vh + 35vw);
-	right: calc(28vw + 8px);
-	border: 2px dashed rgba(122, 138, 128, 1);
-	width: 8vw;
-`;
 
-const LMarksTheSpot = styled(motion.div)`
-	position: absolute;
-	top: calc(5vh + 35vw);
-	right: calc(35vw + 8px);
-	border: 4px solid rgba(122, 138, 128, 1);
-	width: 6vw;
-	transform-origin: center;
-	transform:rotate(45deg);
-`;
-const RMarksTheSpot = styled(motion.div)`
-	position: absolute;
-	top: calc(5vh + 35vw);
-	right: calc(35vw + 8px);
-	border: 4px solid rgba(122, 138, 128, 1);
-	width: 6vw;
-	transform-origin: center;
-	transform:rotate(-45deg);
-`;
-
-const Project1 = ({ project1Animate }) => {
-	const [ mousePosition, setMousePosition ] = useState({ x: 0, y: 0 });
-	const [ animationCoords, setAnimationCoords ] = useState({ x: 500, y: 300 });
-
+const Project3 = ({ project3Animate }) => {
 	const controlTitle = useAnimation();
 	const controlDescription = useAnimation();
 	const controlBackPoly = useAnimation();
@@ -255,34 +213,34 @@ const Project1 = ({ project1Animate }) => {
 	};
 	useEffect(
 		() => {
-			if (project1Animate) {
+			if (project3Animate) {
 				allAnimateSeq();
+				console.log('ofcourse');
 			}
 		},
-		[ project1Animate ]
+		[ project3Animate ]
 	);
-
+	const [ mousePosition, setMousePosition ] = useState(0);
+	const [ animationY, setAnimationY ] = useState(500);
 	return (
 		<Layout>
 			<Background
-				className="Project1"
+				className="Project3"
 				onMouseMove={(event) => {
-					setMousePosition({ x: event.clientX, y: event.clientY });
+					setMousePosition(event.clientY);
 				}}
 			>
-				<StyledTrail
+				<StyledBook
 					onAnimationIteration={(event) => {
-						if (event.animationName === TrailAnimation.name && mousePosition !== 0) {
-							setAnimationCoords(mousePosition);
-							console.log(animationCoords);
+						if (event.animationName === bookAnimation.name && mousePosition !== 0) {
+							setAnimationY(mousePosition);
 						}
 					}}
-					mouseposition={animationCoords}
+					mouseposition={animationY}
 				/>
-
 				<DescriptionDiv>
 					<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
-						Trip Planner
+						Textbook Auction
 					</ProjectTitle>
 					<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, ab ea magnam ipsam hic at ut
@@ -332,4 +290,4 @@ const Project1 = ({ project1Animate }) => {
 	);
 };
 
-export default Project1;
+export default Project3;
