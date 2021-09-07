@@ -7,7 +7,6 @@ import Matter, { Engine, Render, World, Bodies, MouseConstraint } from 'matter-j
 import Layout from './Layout';
 import styled from 'styled-components';
 import LiveButton from './blocks/LiveButton';
-import { render } from 'react-dom';
 
 const STATIC_DENSITY = 15;
 
@@ -288,7 +287,7 @@ const Project2 = ({ project2Animate }) => {
 				</PhysicsDiv>
 				<DescriptionDiv>
 					<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
-						Project Name
+						Inventory Manager
 					</ProjectTitle>
 					<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, ab ea magnam ipsam hic at ut

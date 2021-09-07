@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { StaticImage } from 'gatsby-plugin-image';
+import TrailClean from '../assets/trailClean.svg';
 
 import Layout from './Layout';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import LiveButton from './blocks/LiveButton';
 import GithubButton from './blocks/GithubButton';
 
@@ -18,6 +19,24 @@ const Background = styled.div`
 	justify-content: flex-start;
 
 	scroll-snap-align: start;
+`;
+const TrailAnimation = keyframes`
+	100%{
+		stroke-dasharray: 0;
+	}
+`;
+
+const StyledTrail = styled(TrailClean)`
+	position: absolute;
+	right: 0;
+	width:60%;
+
+	.mainTrail{
+		fill:none;
+		stroke: black;
+		stroke-dasharray: 482.44683837890625;
+
+	}
 `;
 
 const DescriptionDiv = styled.div`
@@ -241,7 +260,7 @@ const Project1 = ({ project1Animate }) => {
 	useEffect(
 		() => {
 			if (project1Animate) {
-				allAnimateSeq();
+				// allAnimateSeq();
 				console.log('ofcourse');
 			}
 		},
@@ -250,16 +269,17 @@ const Project1 = ({ project1Animate }) => {
 	return (
 		<Layout>
 			<Background className="Project1">
-				<TrackContainer>
+				<StyledTrail />
+				{/* <TrackContainer>
 					<TopTrack animate={controlTopTrack} initial={{ width: 0 }} />
 					<MidTrack animate={controlMidTrack} initial={{ height: 0 }} />
 					<BotTrack animate={controlBotTrack} initial={{ width: 0 }} />
 					<LMarksTheSpot animate={controlLSpot} initial={{ scale: 0, rotate: 45 }} />
 					<RMarksTheSpot animate={controlRSpot} initial={{ scale: 0, rotate: -45 }} />
-				</TrackContainer>
-				<DescriptionDiv>
+				</TrackContainer> */}
+				{/* <DescriptionDiv>
 					<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
-						Project Name
+						Trip Planner
 					</ProjectTitle>
 					<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, ab ea magnam ipsam hic at ut
@@ -303,7 +323,7 @@ const Project1 = ({ project1Animate }) => {
 					>
 						<StaticImage height={450} src="../images/TripPlannerLaptop.png" alt="website" />
 					</ForePolygon>
-				</ForePolygonShadowWrap>
+				</ForePolygonShadowWrap> */}
 			</Background>
 		</Layout>
 	);

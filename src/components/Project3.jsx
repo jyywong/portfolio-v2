@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { StaticImage } from 'gatsby-plugin-image';
-
 import Layout from './Layout';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import LiveButton from './blocks/LiveButton';
 import GithubButton from './blocks/GithubButton';
 import FlyingBook from '../assets/flyingBook.svg';
@@ -21,7 +20,81 @@ const Background = styled.div`
 	scroll-snap-align: start;
 `;
 
+const topAnimation = keyframes`
+25%{
+	transform:translateY(-20px)
+}
+75%{
+	transform:translateY(40px)
+}
+100%{
+	transform:translateY(-20px)
+}
+`;
+
+const midAnimation = keyframes`
+30%{
+	transform:translateY(-20px)
+}
+80%{
+	transform:translateY(40px)
+}
+100%{
+	transform:translateY(-20px)
+}
+`;
+const botAnimation = keyframes`
+20%{
+	transform:translateY(-20px)
+}
+70%{
+	transform:translateY(40px)
+}
+100%{
+	transform:translateY(-20px)
+}
+`;
+
+const bookAnimation = keyframes`
+25%{
+	transform:translateY(50px)
+}
+50%{
+	transform:translateY(0px)
+
+}
+75%{
+	transform:translateY(-50px)
+}
+
+100%{
+	right:100vw
+
+
+}
+
+`;
+
 const StyledBook = styled(FlyingBook)`
+position: absolute;
+right: -20vw;
+height: 20vh;
+width:auto;
+top: calc(${(props) => props.mouseposition}px - 10vh);
+
+animation: ${bookAnimation} infinite 4s ease-out;
+.topLine{
+	animation:${topAnimation} infinite 2s linear;
+	animation-direction: alternate;
+}
+.midLine{
+	animation:${midAnimation} infinite 2s linear;
+	animation-direction: alternate;
+}
+.botLine{
+	animation:${botAnimation} infinite 2s linear;
+	animation-direction: alternate;
+}
 `;
 
 const DescriptionDiv = styled.div`
@@ -47,6 +120,7 @@ const ProjectDescription = styled(motion.h4)`
 const ButtonDiv = styled(motion.div)`
 	display: flex;
 	margin-top: 4rem;
+	z-index: 500;
 `;
 
 const ForePolygonShadowWrap = styled.span`
@@ -103,55 +177,6 @@ const BackPolygon = styled(motion.div)`
 	clip-path: polygon(5.5% 0, 100% 0, 100% 100%, 0 100%);
 	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
 `;
-const TrackContainer = styled(motion.div)`
-position: absolute;
-	top: 0;
-	right:0;
-	display: flex;
-	transform: rotate(-10deg);
-`;
-const TopTrack = styled(motion.div)`
-	position: absolute;
-	top: 5vh;
-	right: 0;
-	border: 2px dashed rgba(122, 138, 128, 1);
-	width: 28vw;
-    
-`;
-const MidTrack = styled(motion.div)`
-	position: absolute; 
-	top: 5vh;
-	right: calc(28vw + 4px);
-	border: 2px dashed rgba(122, 138, 128, 1);
-	height: 35vw;
-    
-`;
-const BotTrack = styled(motion.div)`
-	position: absolute;
-	top: calc(5vh + 35vw);
-	right: calc(28vw + 8px);
-	border: 2px dashed rgba(122, 138, 128, 1);
-	width: 8vw;
-`;
-
-const LMarksTheSpot = styled(motion.div)`
-	position: absolute;
-	top: calc(5vh + 35vw);
-	right: calc(35vw + 8px);
-	border: 4px solid rgba(122, 138, 128, 1);
-	width: 6vw;
-	transform-origin: center;
-	transform:rotate(45deg);
-`;
-const RMarksTheSpot = styled(motion.div)`
-	position: absolute;
-	top: calc(5vh + 35vw);
-	right: calc(35vw + 8px);
-	border: 4px solid rgba(122, 138, 128, 1);
-	width: 6vw;
-	transform-origin: center;
-	transform:rotate(-45deg);
-`;
 
 const Project3 = ({ project3Animate }) => {
 	const controlTitle = useAnimation();
@@ -195,14 +220,27 @@ const Project3 = ({ project3Animate }) => {
 		},
 		[ project3Animate ]
 	);
-	console.log(FlyingBook);
+	const [ mousePosition, setMousePosition ] = useState(0);
+	const [ animationY, setAnimationY ] = useState(500);
 	return (
 		<Layout>
-			<Background className="Project3">
-				<StyledBook />
+			<Background
+				className="Project3"
+				onMouseMove={(event) => {
+					setMousePosition(event.clientY);
+				}}
+			>
+				<StyledBook
+					onAnimationIteration={(event) => {
+						if (event.animationName === bookAnimation.name && mousePosition !== 0) {
+							setAnimationY(mousePosition);
+						}
+					}}
+					mouseposition={animationY}
+				/>
 				<DescriptionDiv>
 					<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
-						Project Name
+						Textbook Auction
 					</ProjectTitle>
 					<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, ab ea magnam ipsam hic at ut
