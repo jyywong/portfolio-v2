@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { StaticImage } from 'gatsby-plugin-image';
-import media, { generateMedia } from 'styled-media-query';
+import { generateMedia } from 'styled-media-query';
 import MaskTrail from '../assets/maskTrail.svg';
 
 import Layout from './Layout';
@@ -373,7 +373,6 @@ const Project1 = ({ project1Animate }) => {
 					onAnimationIteration={(event) => {
 						if (event.animationName === TrailAnimation.name && mousePosition !== 0) {
 							setAnimationCoords(mousePosition);
-							console.log(animationCoords);
 						}
 					}}
 					mouseposition={animationCoords}
