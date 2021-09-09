@@ -2,8 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import NET from 'vanta/dist/vanta.net.min';
 import styled from 'styled-components';
+import media, { generateMedia } from 'styled-media-query';
 import Layout from './Layout';
-
+const customMedia = generateMedia({
+	small: '500px'
+});
 const Background = styled.div`
 	width: 100vw;
 	height: 100vh;
@@ -14,6 +17,10 @@ const Background = styled.div`
 	justify-content: center;
 	flex-direction: column;
 	scroll-snap-align: start;
+
+	${customMedia.lessThan('small')`
+		padding:2rem;
+	`};
 `;
 
 const HeroText = styled.h1`
@@ -21,6 +28,10 @@ const HeroText = styled.h1`
 	font-size: 6rem;
 	color: white;
 	font-weight: 300;
+
+	${media.lessThan('medium')`
+		font-size:4rem;
+	`};
 `;
 
 const Button = styled.button`

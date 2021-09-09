@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { StaticImage } from 'gatsby-plugin-image';
-import TrailClean from '../assets/trailClean.svg';
+import media, { generateMedia } from 'styled-media-query';
 import MaskTrail from '../assets/maskTrail.svg';
 
 import Layout from './Layout';
 import styled, { keyframes } from 'styled-components';
 import LiveButton from './blocks/LiveButton';
 import GithubButton from './blocks/GithubButton';
+
+const customMedia = generateMedia({
+	mLaptop: '1210px',
+	sLaptop: '1024px',
+	xsLaptop: '850px',
+	tablet: '700px',
+	sTablet: '550px',
+	lPhone: '430px',
+	mPhone: '375px'
+});
 
 const Background = styled.div`
 	position: relative;
@@ -20,6 +30,11 @@ const Background = styled.div`
 	justify-content: flex-start;
 
 	scroll-snap-align: start;
+
+	${customMedia.lessThan('sLaptop')`
+		flex-direction:column;
+		padding:5rem;
+	`};
 `;
 const TrailAnimation = keyframes`
 	0%{
@@ -91,22 +106,84 @@ const DescriptionDiv = styled.div`
 	text-align: left;
 	padding-left: 8rem;
 	z-index: 10;
+	${customMedia.lessThan('sLaptop')`
+	padding-left: 0;
+	`};
 `;
 
 const ProjectTitle = styled(motion.h1)`
 	font-size: 10rem;
 	color: white;
 	z-index:10;
-
+	${customMedia.lessThan('sLaptop')`
+		font-size: 8rem;
+		
+	`};
+	${customMedia.lessThan('sTablet')`
+		font-size:6rem;
+	`};
+	${customMedia.lessThan('lPhone')`
+		font-size:5rem;
+	`};
+	${customMedia.lessThan('mPhone')`
+		font-size:4.1rem;
+	`};
 `;
 const ProjectDescription = styled(motion.h4)`
 	font-size: 2.5rem;
 	color: #a8dadc;
 	font-weight: 100;
+	hyphens: auto;
+	${customMedia.lessThan('sLaptop')`
+		font-size: 2rem;
+	`};
+	${customMedia.lessThan('sTablet')`
+		font-size:1.6rem;
+	`};
+	${customMedia.lessThan('mPhone')`
+		font-size:1.3rem;
+	`};
 `;
 const ButtonDiv = styled(motion.div)`
 	display: flex;
 	margin-top: 4rem;
+	${customMedia.lessThan('mLaptop')`
+		justify-content:space-between;
+	`};
+	${customMedia.lessThan('sTablet')`
+		justify-content:center;
+		align-items:center;
+		flex-direction:column;
+		width:100%;
+	`};
+	${customMedia.lessThan('lPhone')`
+		margin-top:1rem;
+	`};
+`;
+const ImageContainer = styled.div`
+	width: 85%;
+	height: 85%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	${customMedia.lessThan('sLaptop')`
+		margin-top:6rem;
+		width: 85%;
+		height: 85%;
+	`};
+	${customMedia.lessThan('xsLaptop')`
+		margin-top:6rem;
+		width: 100%;
+		height: 100%;
+	`};
+	${customMedia.lessThan('tablet')`
+		width: 80%;
+		height: 80%;
+	`};
+	${customMedia.lessThan('sTablet')`
+		width: 100%;
+		height: 100%;
+	`};
 `;
 
 const ForePolygonShadowWrap = styled.span`
@@ -116,6 +193,11 @@ const ForePolygonShadowWrap = styled.span`
 	top: 22.5vh;
 	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
 	z-index: 100;
+	${customMedia.lessThan('sLaptop')`
+	right: auto;
+	top: auto;
+	bottom:0;
+	`};
 `;
 
 const ForePolygon = styled(motion.div)`
@@ -127,6 +209,24 @@ const ForePolygon = styled(motion.div)`
 	height: 55vh;
 	clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
 	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
+	${customMedia.lessThan('mLaptop')`
+		width:60vw;
+	`};
+	${customMedia.lessThan('sLaptop')`
+	clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 100%);
+	width:70vw;
+	height: 50vh;
+	`};
+	${customMedia.lessThan('tablet')`
+	width:100vw;
+	height: 50vh;
+	`};
+	${customMedia.lessThan('sTablet')`
+		height: 45vh;
+	`};
+	${customMedia.lessThan('mPhone')`
+		height: 40vh;
+	`};
 `;
 
 const MidPolygonShadowWrap = styled.span`
@@ -136,6 +236,12 @@ const MidPolygonShadowWrap = styled.span`
 	top: 27.5vh;
 	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
 	z-index: 100;
+	${customMedia.lessThan('sLaptop')`
+	right: auto;
+	top: auto;
+	left:40vw;
+	bottom:0;
+	`};
 `;
 
 const MidPolygon = styled(motion.div)`
@@ -146,6 +252,23 @@ const MidPolygon = styled(motion.div)`
     width:54.5vw;
 	clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
 	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
+	${customMedia.lessThan('mLaptop')`
+		width:61.5vw;
+	`};
+	${customMedia.lessThan('sLaptop')`
+		clip-path: polygon(0 0, 100% 9%, 100% 100%, 0 100%);
+		height:53vh;
+		width:40vw;
+	`};
+	${customMedia.lessThan('tablet')`
+		width:55vw;
+	`};
+	${customMedia.lessThan('sTablet')`
+		height: 47vh;
+	`};
+	${customMedia.lessThan('mPhone')`
+		height: 42vh;
+	`};
 `;
 
 const BackPolygonShadowWrap = styled(motion.span)`
@@ -155,7 +278,15 @@ const BackPolygonShadowWrap = styled(motion.span)`
     top: 45.5vh;
 	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
 	z-index:100;
-
+	${customMedia.lessThan('sLaptop')`
+	right: auto;
+	top: auto;
+	left:24vw;
+	bottom:0;
+	`};
+	${customMedia.lessThan('tablet')`
+		left:15vw;
+	`};
 `;
 
 const BackPolygon = styled(motion.div)`
@@ -166,55 +297,23 @@ const BackPolygon = styled(motion.div)`
 	width: 58vw;
 	clip-path: polygon(5.5% 0, 100% 0, 100% 100%, 0 100%);
 	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
-`;
-const TrackContainer = styled(motion.div)`
-position: absolute;
-	top: 0;
-	right:0;
-	display: flex;
-	transform: rotate(-10deg);
-`;
-const TopTrack = styled(motion.div)`
-	position: absolute;
-	top: 5vh;
-	right: 0;
-	border: 2px dashed rgba(122, 138, 128, 1);
-	width: 28vw;
-    
-`;
-const MidTrack = styled(motion.div)`
-	position: absolute; 
-	top: 5vh;
-	right: calc(28vw + 4px);
-	border: 2px dashed rgba(122, 138, 128, 1);
-	height: 35vw;
-    
-`;
-const BotTrack = styled(motion.div)`
-	position: absolute;
-	top: calc(5vh + 35vw);
-	right: calc(28vw + 8px);
-	border: 2px dashed rgba(122, 138, 128, 1);
-	width: 8vw;
-`;
-
-const LMarksTheSpot = styled(motion.div)`
-	position: absolute;
-	top: calc(5vh + 35vw);
-	right: calc(35vw + 8px);
-	border: 4px solid rgba(122, 138, 128, 1);
-	width: 6vw;
-	transform-origin: center;
-	transform:rotate(45deg);
-`;
-const RMarksTheSpot = styled(motion.div)`
-	position: absolute;
-	top: calc(5vh + 35vw);
-	right: calc(35vw + 8px);
-	border: 4px solid rgba(122, 138, 128, 1);
-	width: 6vw;
-	transform-origin: center;
-	transform:rotate(-45deg);
+	${customMedia.lessThan('mLaptop')`
+		width:64.5vw;
+	`};
+	${customMedia.lessThan('sLaptop')`
+		clip-path: polygon(0 0, 100% 6.5%, 100% 100%, 0 100%);
+		height:52vh;
+		width:30vw;
+	`};
+	${customMedia.lessThan('tablet')`
+		width:30vw;
+	`};
+	${customMedia.lessThan('sTablet')`
+		height: 46.5vh;
+	`};
+	${customMedia.lessThan('mPhone')`
+		height: 42.5vh;
+	`};
 `;
 
 const Project1 = ({ project1Animate }) => {
@@ -324,7 +423,9 @@ const Project1 = ({ project1Animate }) => {
 						animate={controlForePoly}
 						initial={{ x: 1100 }}
 					>
-						<StaticImage height={450} src="../images/TripPlannerLaptop.png" alt="website" />
+						<ImageContainer>
+							<StaticImage src="../images/TripPlannerLaptop.png" alt="website" />
+						</ImageContainer>
 					</ForePolygon>
 				</ForePolygonShadowWrap>
 			</Background>
