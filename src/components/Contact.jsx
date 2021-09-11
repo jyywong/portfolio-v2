@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import Layout from './Layout';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { generateMedia } from 'styled-media-query';
 import { HiChevronDoubleUp } from 'react-icons/hi';
 import Triangle from '../assets/triangle.svg';
+
+const customMedia = generateMedia({
+	sTablet: '580px',
+	xsTablet: '500px',
+	phone: '425px',
+	sPhone: '350px'
+});
 
 const Background = styled.div`
 	position: relative;
@@ -27,6 +36,9 @@ const FormContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	text-align: center;
+	${customMedia.lessThan('sTablet')`
+		width:90%;
+	`};
 `;
 
 const SectionHeader = styled.h1`
@@ -36,14 +48,23 @@ const SectionHeader = styled.h1`
 	text-transform: uppercase;
 	text-decoration: underline;
 	text-decoration-thickness: 8%;
+	${customMedia.lessThan('xsTablet')`
+		font-size:5rem;
+	`};
+	${customMedia.lessThan('sPhone')`
+		font-size:4rem;
+	`};
 `;
 const SectionPrompt = styled.p`
 	margin-top: 2rem;
 	font-size: 2.5rem;
 	color: #457b9d;
+	${customMedia.lessThan('xsTablet')`
+		font-size:1.8rem;
+	`};
 `;
 
-const LineInput = styled.input`
+const LineInput = styled(motion.input)`
 	margin-top: 2rem;
 	text-align: center;
 	padding: 1rem;
@@ -56,8 +77,14 @@ const LineInput = styled.input`
 	&::placeholder {
 		color: rgb(29, 53, 87, 0.5);
 	}
+	&:focus{
+		outline:none;
+	}
+	${customMedia.lessThan('phone')`
+		font-size:1.5rem;
+	`};
 `;
-const MultiLineInput = styled.textarea`
+const MultiLineInput = styled(motion.textarea)`
 	font-family: inherit;
 	margin-top: 2rem;
 	text-align: center;
@@ -71,9 +98,15 @@ const MultiLineInput = styled.textarea`
 	&::placeholder {
 		color: rgb(29, 53, 87, 0.5);
 	}
+	&:focus{
+		outline:none;
+	}
+	${customMedia.lessThan('phone')`
+		font-size:1.5rem;
+	`};
 `;
 
-const SubmitButton = styled.button`
+const SubmitButton = styled(motion.button)`
 	margin-top: 2rem;
 	padding: 1rem;
 	border-radius: 5px;
@@ -83,38 +116,73 @@ const SubmitButton = styled.button`
 	color: #1d3557;
 	text-transform: uppercase;
 	background-color: transparent;
+	cursor: pointer;
+	${customMedia.lessThan('sPhone')`
+		font-size:2rem;
+		padding:.75rem;
+	`};
 `;
 
-const ReturnTop = styled.button`
+const ReturnTop = styled(motion.button)`
 	position: absolute;
-	margin-top: 10 rem;
 	background-color: #e63946;
 	padding: 1rem;
 	border: none;
 	font-size: 3rem;
 	color: white;
-	bottom: 5vh;
+	bottom: 2vh;
 	cursor: pointer;
+	${customMedia.lessThan('sPhone')`
+		font-size:2.5rem;
+		padding:.75rem;
+	`};
 `;
-const Contact = () => {
+const Contact = forwardRef(({ handleBackToTop }, ref) => {
 	return (
 		<Layout>
-			<Background>
+			<Background ref={ref}>
 				<StyledTriangle />
 				<FormContainer>
 					<SectionHeader>Contact</SectionHeader>
 					<SectionPrompt> Have a question or want to work together?</SectionPrompt>
-					<LineInput placeholder="Name" />
-					<LineInput placeholder="Email" />
-					<MultiLineInput placeholder="Your message" rows="5" />
-					<SubmitButton> Submit</SubmitButton>
+					<LineInput
+						whileFocus={{
+							scale: 1.03,
+							boxShadow: ' 0 0 0 4px rgb(69, 123, 157, 0.4)'
+						}}
+						placeholder="Name"
+					/>
+					<LineInput
+						whileFocus={{
+							scale: 1.03,
+							boxShadow: ' 0 0 0 4px rgb(69, 123, 157, 0.4)'
+						}}
+						placeholder="Email"
+					/>
+					<MultiLineInput
+						whileFocus={{
+							scale: 1.03,
+							boxShadow: ' 0 0 0 4px rgb(69, 123, 157, 0.4)'
+						}}
+						placeholder="Your message"
+						rows="5"
+					/>
+					<SubmitButton whileHover={{ backgroundColor: '#1d3557', borderColor: '#1d3557', color: 'white' }}>
+						Submit
+					</SubmitButton>
 				</FormContainer>
-				<ReturnTop>
+				<ReturnTop
+					whileHover={{
+						scale: 1.05,
+						y: -5
+					}}
+					onClick={handleBackToTop}
+				>
 					<HiChevronDoubleUp />
 				</ReturnTop>
 			</Background>
 		</Layout>
 	);
-};
+});
 
 export default Contact;

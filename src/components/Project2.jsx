@@ -1,12 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { forwardRef, useState, useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
+import { useMediaQuery } from '@react-hook/media-query';
 import { StaticImage } from 'gatsby-plugin-image';
+import { generateMedia } from 'styled-media-query';
 import { FaGithub } from 'react-icons/fa';
 import Matter, { Engine, Render, World, Bodies, MouseConstraint } from 'matter-js';
 
 import Layout from './Layout';
 import styled from 'styled-components';
 import LiveButton from './blocks/LiveButton';
+
+const customMedia = generateMedia({
+	mLaptop: '1210px',
+	sLaptop: '1024px',
+	xsLaptop: '850px',
+	tablet: '700px',
+	wTablet: '560px',
+	sTablet: '550px',
+	lPhone: '430px',
+	mPhone: '375px'
+});
 
 const STATIC_DENSITY = 15;
 
@@ -20,6 +33,11 @@ const Background = styled.div`
 	align-items: center;
 	justify-content: flex-end;
 	scroll-snap-align: start;
+	${customMedia.lessThan('sLaptop')`
+		flex-direction:column;
+		padding:5rem;
+		justify-content: flex-start;
+	`};
 `;
 const PhysicsDiv = styled.div`
 	position: absolute;
@@ -36,23 +54,93 @@ const DescriptionDiv = styled.div`
 	justify-content: center;
 	text-align: right;
 	padding-right: 8rem;
+	z-index: 100;
+	${customMedia.lessThan('sLaptop')`
+	padding-right: 0;
+	`};
 `;
 
 const ProjectTitle = styled(motion.h1)`
-	font-size: 10rem;
+	font-size: 8.5rem;
 	color: white;
+	${customMedia.lessThan('sLaptop')`
+		font-size: 7rem;
+		
+	`};
+	${customMedia.lessThan('tablet')`
+		font-size: 5.5rem;
+		
+	`};
+	${customMedia.lessThan('wTablet')`
+		font-size:4.5rem;
+	`};
+	${customMedia.lessThan('lPhone')`
+		font-size:4rem;
+	`};
+	${customMedia.lessThan('mPhone')`
+		font-size:4rem;
+	`};
 `;
 const ProjectDescription = styled(motion.h4)`
 	font-size: 2.5rem;
 	color: #a8dadc;
 	font-weight: 100;
+	hyphens: auto;
+	
+	${customMedia.lessThan('sLaptop')`
+		font-size: 2rem;
+	`};
+	${customMedia.lessThan('sTablet')`
+		font-size:1.6rem;
+	`};
+	${customMedia.lessThan('mPhone')`
+		font-size:1.3rem;
+	`};
 `;
 const ButtonDiv = styled(motion.div)`
 	display: flex;
 	margin-top: 4rem;
     justify-content: flex-end;
+	z-index:100;
+	${customMedia.lessThan('mLaptop')`
+		justify-content:space-between;
+	`};
+	${customMedia.lessThan('sTablet')`
+		justify-content:center;
+		align-items:center;
+		flex-direction:column;
+		width:100%;
+	`};
+	${customMedia.lessThan('lPhone')`
+		margin-top:1rem;
+	`};
 `;
-const GitButton = styled.button`
+const ImageContainer = styled.div`
+	width: 85%;
+	height: 85%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	${customMedia.lessThan('sLaptop')`
+		margin-top:6rem;
+		width: 85%;
+		height: 85%;
+	`};
+	${customMedia.lessThan('xsLaptop')`
+		margin-top:6rem;
+		width: 100%;
+		height: 100%;
+	`};
+	${customMedia.lessThan('tablet')`
+		width: 80%;
+		height: 80%;
+	`};
+	${customMedia.lessThan('sTablet')`
+		width: 100%;
+		height: 100%;
+	`};
+`;
+const GitButton = styled(motion.button)`
 	color: white;
 	background-color: #1d3557;
 	border: none;
@@ -60,14 +148,32 @@ const GitButton = styled.button`
 	font-size: 2.5rem;
 	font-weight: 700;
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	cursor: pointer;
+	${customMedia.lessThan('sLaptop')`
+	width:47.5%;
+	`};
+	${customMedia.lessThan('sTablet')`
+	width:100%;
+	`};
+	${customMedia.lessThan('mPhone')`
+		padding:.75rem;
+		font-size:2rem;
+	`};
 `;
 
 const ButtonText = styled.h6`
 	font-size: 2.5rem;
 	font-weight: 700;
 	margin-right: 1rem;
+	${customMedia.lessThan('lPhone')`
+		font-size:2rem;
+	`};
+	${customMedia.lessThan('mPhone')`
+		font-size:1.5rem;
+	`};
 `;
 
 const ForePolygonShadowWrap = styled.span`
@@ -75,6 +181,11 @@ const ForePolygonShadowWrap = styled.span`
 	top: 22.5vh;
 	left: -5rem;
 	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
+	${customMedia.lessThan('sLaptop')`
+	left: auto;
+	top: auto;
+	bottom:0;
+	`};
 `;
 
 const ForePolygon = styled(motion.div)`
@@ -86,6 +197,24 @@ const ForePolygon = styled(motion.div)`
 	height: 55vh;
 	clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
 	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
+	${customMedia.lessThan('mLaptop')`
+		width:60vw;
+	`};
+	${customMedia.lessThan('sLaptop')`
+	clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 100%);
+	width:70vw;
+	height: 50vh;
+	`};
+	${customMedia.lessThan('tablet')`
+	width:100vw;
+	height: 50vh;
+	`};
+	${customMedia.lessThan('sTablet')`
+		height: 45vh;
+	`};
+	${customMedia.lessThan('mPhone')`
+		height: 40vh;
+	`};
 `;
 
 const MidPolygonShadowWrap = styled.span`
@@ -93,6 +222,12 @@ const MidPolygonShadowWrap = styled.span`
 	top: 27.5vh;
 	left: -5rem;
 	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
+	${customMedia.lessThan('sLaptop')`
+	right: auto;
+	top: auto;
+	left:40vw;
+	bottom:0;
+	`};
 `;
 
 const MidPolygon = styled(motion.div)`
@@ -103,6 +238,23 @@ const MidPolygon = styled(motion.div)`
     width:54.5vw;
 	clip-path: polygon(0% 0, 92% 0, 100% 100%, 0 100%);
 	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
+	${customMedia.lessThan('mLaptop')`
+		width:60.5vw;
+	`};
+	${customMedia.lessThan('sLaptop')`
+		clip-path: polygon(0 0, 100% 9%, 100% 100%, 0 100%);
+		height:53vh;
+		width:40vw;
+	`};
+	${customMedia.lessThan('tablet')`
+		width:55vw;
+	`};
+	${customMedia.lessThan('sTablet')`
+		height: 47vh;
+	`};
+	${customMedia.lessThan('mPhone')`
+		height: 42vh;
+	`};
 `;
 
 const BackPolygonShadowWrap = styled(motion.span)`
@@ -110,6 +262,15 @@ const BackPolygonShadowWrap = styled(motion.span)`
 	top: 45.5vh;
 	left: -5rem;
 	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
+	${customMedia.lessThan('sLaptop')`
+	right: auto;
+	top: auto;
+	left:24vw;
+	bottom:0;
+	`};
+	${customMedia.lessThan('tablet')`
+		left:15vw;
+	`};
 `;
 
 const BackPolygon = styled(motion.div)`
@@ -120,9 +281,31 @@ const BackPolygon = styled(motion.div)`
 	width: 58vw;
 	clip-path: polygon(0 0, 94.5% 0, 100% 100%, 0 100%);
 	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
+	${customMedia.lessThan('mLaptop')`
+		width:62.5vw;
+	`};
+	${customMedia.lessThan('sLaptop')`
+		clip-path: polygon(0 0, 100% 6.5%, 100% 100%, 0 100%);
+		height:52vh;
+		width:30vw;
+	`};
+	${customMedia.lessThan('tablet')`
+		width:30vw;
+	`};
+	${customMedia.lessThan('sTablet')`
+		height: 46.5vh;
+	`};
+	${customMedia.lessThan('mPhone')`
+		height: 42.5vh;
+	`};
 `;
 
-const Project2 = ({ project2Animate }) => {
+const Project2 = forwardRef(({ project2Animate }, ref) => {
+	const laptopMatch = useMediaQuery('only screen and (max-width:1024px)');
+	const tabletMatch = useMediaQuery('only screen and (max-width:700px)');
+	const phoneMatch = useMediaQuery('only screen and (max-width:700px)');
+	const mPhoneMatch = useMediaQuery('only screen and (max-width:550px)');
+
 	const boxRef = useRef(null);
 	const canvasRef = useRef(null);
 
@@ -132,8 +315,9 @@ const Project2 = ({ project2Animate }) => {
 	const handleResize = () => {
 		setConstraints(boxRef.current.getBoundingClientRect());
 	};
-	const handleClick = () => {
+	const handleClick = (event) => {
 		console.log('click');
+		console.log(event);
 		const mouseX = scene.engine.world.constraints[0].pointA.x;
 		const mouseY = scene.engine.world.constraints[0].pointA.y;
 		const randomWidth = Math.floor(Math.random() * (120 - 75 + 1) + 75);
@@ -177,7 +361,6 @@ const Project2 = ({ project2Animate }) => {
 	useEffect(
 		() => {
 			if (project2Animate) {
-				console.log('hello');
 				allAnimateSeq();
 			}
 		},
@@ -210,25 +393,37 @@ const Project2 = ({ project2Animate }) => {
 					fillStyle: 'transparent'
 				}
 			});
-
-			const randomBox = Bodies.rectangle(1200, 0, 75, 75, {
+			const responsiveScale = render.options.width;
+			const randomBox = Bodies.rectangle(responsiveScale * 0.75, 0, phoneMatch ? 50 : 75, phoneMatch ? 50 : 75, {
 				render: {
 					fillStyle: 'brown'
 				},
 				angle: Math.PI * 0.1
 			});
-			const randomBox2 = Bodies.rectangle(1250, -1200, 80, 80, {
-				render: {
-					fillStyle: 'yellow'
-				},
-				angle: Math.PI * 0.2
-			});
-			const randomBox3 = Bodies.rectangle(1300, -600, 90, 90, {
-				render: {
-					fillStyle: 'grey'
-				},
-				angle: Math.PI * 0.15
-			});
+			const randomBox2 = Bodies.rectangle(
+				responsiveScale * 0.73,
+				-1200,
+				phoneMatch ? 55 : 80,
+				phoneMatch ? 55 : 80,
+				{
+					render: {
+						fillStyle: 'yellow'
+					},
+					angle: Math.PI * 0.2
+				}
+			);
+			const randomBox3 = Bodies.rectangle(
+				responsiveScale * 0.71,
+				-600,
+				phoneMatch ? 60 : 90,
+				phoneMatch ? 60 : 90,
+				{
+					render: {
+						fillStyle: 'grey'
+					},
+					angle: Math.PI * 0.15
+				}
+			);
 
 			const mConstraint = MouseConstraint.create(engine);
 
@@ -263,9 +458,19 @@ const Project2 = ({ project2Animate }) => {
 				// Dynamically update floor
 				const floor = scene.engine.world.bodies[0];
 
+				let floorHeight = 100;
+				if (laptopMatch) {
+					floorHeight = scene.canvas.height * 0.5;
+				}
+				if (tabletMatch) {
+					floorHeight = scene.canvas.height * 0.75;
+				}
+				if (mPhoneMatch) {
+					floorHeight = scene.canvas.height * 0.78;
+				}
 				Matter.Body.setPosition(floor, {
 					x: width / 2,
-					y: height + STATIC_DENSITY / 2 - 100
+					y: height + STATIC_DENSITY / 2 - floorHeight
 				});
 
 				Matter.Body.setVertices(floor, [
@@ -281,7 +486,7 @@ const Project2 = ({ project2Animate }) => {
 
 	return (
 		<Layout>
-			<Background className="Project2" onClick={handleClick}>
+			<Background ref={ref} className="Project2" onClick={handleClick} onTouchStart={handleClick}>
 				<PhysicsDiv ref={boxRef}>
 					<canvas ref={canvasRef} />
 				</PhysicsDiv>
@@ -297,7 +502,12 @@ const Project2 = ({ project2Animate }) => {
 					</ProjectDescription>
 					<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
 						<LiveButton />
-						<GitButton>
+						<GitButton
+							whileHover={{
+								scale: 1.05,
+								y: -4
+							}}
+						>
 							<ButtonText>GITHUB</ButtonText>
 							<FaGithub />
 						</GitButton>
@@ -332,12 +542,14 @@ const Project2 = ({ project2Animate }) => {
 						animate={controlForePoly}
 						initial={{ x: -1100 }}
 					>
-						<StaticImage height={450} src="../images/TripPlannerLaptop.png" alt="website" />
+						<ImageContainer>
+							<StaticImage src="../images/TripPlannerLaptop.png" alt="website" />
+						</ImageContainer>
 					</ForePolygon>
 				</ForePolygonShadowWrap>
 			</Background>
 		</Layout>
 	);
-};
+});
 
 export default Project2;

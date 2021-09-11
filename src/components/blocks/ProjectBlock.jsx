@@ -1,11 +1,11 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { MdFolderOpen } from 'react-icons/md';
 
-const ProjectDiv = styled.div`
+const ProjectDiv = styled(motion.div)`
 	background-color: #457b9d;
-	/* height: 250px;
-	width: 250px; */
+	cursor: pointer;
 	height: 250px;
 	width: 100%;
 	padding: 1.5rem;
@@ -35,7 +35,12 @@ const ProjectTags = styled.p`
 `;
 const ProjectBlock = () => {
 	return (
-		<ProjectDiv>
+		<ProjectDiv
+			whileHover={{
+				scale: 1.05,
+				y: -2
+			}}
+		>
 			<ProjectHeader>
 				<MdFolderOpen />
 			</ProjectHeader>
