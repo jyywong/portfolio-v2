@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import Layout from './Layout';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -137,10 +137,10 @@ const ReturnTop = styled(motion.button)`
 		padding:.75rem;
 	`};
 `;
-const Contact = ({ handleBackToTop }) => {
+const Contact = forwardRef(({ handleBackToTop }, ref) => {
 	return (
 		<Layout>
-			<Background>
+			<Background ref={ref}>
 				<StyledTriangle />
 				<FormContainer>
 					<SectionHeader>Contact</SectionHeader>
@@ -183,6 +183,6 @@ const Contact = ({ handleBackToTop }) => {
 			</Background>
 		</Layout>
 	);
-};
+});
 
 export default Contact;

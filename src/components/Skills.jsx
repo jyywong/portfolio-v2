@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import { useMediaQuery, useMediaQueries } from '@react-hook/media-query';
 import { motion, useAnimation } from 'framer-motion';
 import styled from 'styled-components';
@@ -145,7 +145,7 @@ const ThreeHook = ({ matches }) => {
 	return <React.Fragment />;
 };
 
-const Skills = ({ skillsAnimate }) => {
+const Skills = forwardRef(({ skillsAnimate }, ref) => {
 	const matches = useMediaQuery('only screen and (max-width:800px)');
 	const controlDescription = useAnimation();
 	const controlCanvas = useAnimation();
@@ -171,7 +171,7 @@ const Skills = ({ skillsAnimate }) => {
 	);
 	return (
 		<Layout>
-			<Background className="Skills">
+			<Background ref={ref} className="Skills">
 				<HalfDiv animate={controlDescription} initial={{ x: -800 }}>
 					<MainHeading>
 						Here are some of the <AccentSpan>languages</AccentSpan> and{' '}
@@ -199,6 +199,6 @@ const Skills = ({ skillsAnimate }) => {
 			</Background>
 		</Layout>
 	);
-};
+});
 
 export default Skills;

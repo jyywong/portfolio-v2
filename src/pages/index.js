@@ -20,37 +20,71 @@ ScrollTrigger.defaults({
 
 const ScrollContainer = styled.div`
 	position: relative;
-	scroll-snap-type: y mandatory;
+	scroll-snap-type: y proximity;
 	height: 100vh;
 	width: 100vw;
 	overflow-y: scroll;
 	overflow-x: hidden;
 	z-index: 1001;
+	&::-webkit-scrollbar {
+		width: 1rem;
+	}
+	&::-webkit-scrollbar-track {
+		background: #1d3557;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: .5rem;
+		background: rgba(191, 191, 191, 0.5);
+
+		border: 2px solid #1d3557;
+	}
 `;
 
 const IndexPage = () => {
 	const previousScroll = useRef(0);
-	const [ navStatus, setNavStatus ] = useState('');
+	const [ navInteract, setNavInteract ] = useState(false);
+	const [ navStatus, setNavStatus ] = useState('disappear');
 	const heroRef = useRef();
+	const skillsRef = useRef();
 	const project1Ref = useRef();
+	const project2Ref = useRef();
+	const project3Ref = useRef();
+	const contactRef = useRef();
 	const [ skillsAnimate, setSkillsAnimate ] = useState(false);
 	const [ project1Animate, setProject1Animate ] = useState(false);
 	const [ project2Animate, setProject2Animate ] = useState(false);
 	const [ project3Animate, setProject3Animate ] = useState(false);
 
-	const handleViewWork = () => {
-		project1Ref.current.scrollIntoView({ behavior: 'smooth' });
-	};
 	const handleBackToTop = () => {
 		heroRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
+	const handleViewSkill = () => {
+		skillsRef.current.scrollIntoView({ behavior: 'smooth' });
+	};
+	const handleViewWork = () => {
+		project1Ref.current.scrollIntoView({ behavior: 'smooth' });
+	};
+	const handleViewContact = () => {
+		contactRef.current.scrollIntoView({ behavior: 'smooth' });
+	};
+
 	const handleScroll = (event) => {
 		const currentScroll = event.target.scrollTop;
-		if (currentScroll > previousScroll.current) {
+		if (currentScroll === 0) {
 			setNavStatus('disappear');
-		} else if (currentScroll < previousScroll.current) {
-			setNavStatus('visible');
+		} else {
+			if (currentScroll > previousScroll.current) {
+				if (!navInteract) {
+					setTimeout(() => {
+						console.log('navInteract', navInteract);
+						setNavStatus('disappear');
+					}, 1500);
+				}
+			} else if (currentScroll < previousScroll.current) {
+				setNavStatus('visible');
+			}
 		}
+
 		previousScroll.current = currentScroll;
 		console.log(previousScroll.current);
 	};
@@ -90,16 +124,34 @@ const IndexPage = () => {
 		});
 	}, []);
 
+	useEffect(
+		() => {
+			if (navInteract) {
+				setNavStatus('visible');
+			}
+		},
+		[ navInteract ]
+	);
+
 	return (
 		<React.Fragment>
 			<ScrollContainer className="scrollContainer" onScroll={handleScroll}>
-				<Navbar navstatus={navStatus} />
+				<Navbar
+					navInteract={navInteract}
+					setNavInteract={setNavInteract}
+					navstatus={navStatus}
+					setNavStatus={setNavStatus}
+					handleBackToTop={handleBackToTop}
+					handleViewSkill={handleViewSkill}
+					handleViewWork={handleViewWork}
+					handleViewContact={handleViewContact}
+				/>
 				<Hero ref={heroRef} handleViewWork={handleViewWork} />
-				<Skills skillsAnimate={skillsAnimate} />
+				<Skills ref={skillsRef} skillsAnimate={skillsAnimate} />
 				<Project1 ref={project1Ref} project1Animate={project1Animate} />
-				<Project2 project2Animate={project2Animate} />
-				<Project3 project3Animate={project3Animate} />
-				<Contact handleBackToTop={handleBackToTop} />
+				<Project2 ref={project2Ref} project2Animate={project2Animate} />
+				<Project3 ref={project3Ref} project3Animate={project3Animate} />
+				<Contact ref={contactRef} handleBackToTop={handleBackToTop} />
 				{/* <ProjectDetails /> */}
 			</ScrollContainer>
 		</React.Fragment>

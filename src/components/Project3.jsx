@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { StaticImage } from 'gatsby-plugin-image';
 import { generateMedia } from 'styled-media-query';
@@ -338,7 +338,7 @@ const BackPolygon = styled(motion.div)`
 	`};
 `;
 
-const Project3 = ({ project3Animate }) => {
+const Project3 = forwardRef(({ project3Animate }, ref) => {
 	const controlTitle = useAnimation();
 	const controlDescription = useAnimation();
 	const controlBackPoly = useAnimation();
@@ -385,6 +385,7 @@ const Project3 = ({ project3Animate }) => {
 	return (
 		<Layout>
 			<Background
+				ref={ref}
 				className="Project3"
 				onMouseMove={(event) => {
 					setMousePosition(event.clientY);
@@ -450,6 +451,6 @@ const Project3 = ({ project3Animate }) => {
 			</Background>
 		</Layout>
 	);
-};
+});
 
 export default Project3;

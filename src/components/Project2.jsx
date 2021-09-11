@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { forwardRef, useState, useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useMediaQuery } from '@react-hook/media-query';
 import { StaticImage } from 'gatsby-plugin-image';
@@ -300,7 +300,7 @@ const BackPolygon = styled(motion.div)`
 	`};
 `;
 
-const Project2 = ({ project2Animate }) => {
+const Project2 = forwardRef(({ project2Animate }, ref) => {
 	const laptopMatch = useMediaQuery('only screen and (max-width:1024px)');
 	const tabletMatch = useMediaQuery('only screen and (max-width:700px)');
 	const phoneMatch = useMediaQuery('only screen and (max-width:700px)');
@@ -486,7 +486,7 @@ const Project2 = ({ project2Animate }) => {
 
 	return (
 		<Layout>
-			<Background className="Project2" onClick={handleClick} onTouchStart={handleClick}>
+			<Background ref={ref} className="Project2" onClick={handleClick} onTouchStart={handleClick}>
 				<PhysicsDiv ref={boxRef}>
 					<canvas ref={canvasRef} />
 				</PhysicsDiv>
@@ -550,6 +550,6 @@ const Project2 = ({ project2Animate }) => {
 			</Background>
 		</Layout>
 	);
-};
+});
 
 export default Project2;
