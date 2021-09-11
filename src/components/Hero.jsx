@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import * as THREE from 'three';
+import { motion } from 'framer-motion';
 import NET from 'vanta/dist/vanta.net.min';
 import styled from 'styled-components';
 import media, { generateMedia } from 'styled-media-query';
@@ -17,6 +18,7 @@ const Background = styled.div`
 	justify-content: center;
 	flex-direction: column;
 	scroll-snap-align: start;
+	margin-top: -7vh;
 
 	${customMedia.lessThan('small')`
 		padding:2rem;
@@ -34,7 +36,7 @@ const HeroText = styled.h1`
 	`};
 `;
 
-const Button = styled.button`
+const Button = styled(motion.button)`
 	margin-top: 2rem;
 	padding: 1rem;
 	border: 2px solid white;
@@ -46,15 +48,14 @@ const Button = styled.button`
 
 const NameSpan = styled.span`color: #e63946;`;
 
-const Hero = () => {
+const Hero = forwardRef(({ handleViewWork }, ref) => {
 	const [ vantaEffect, setVantaEffect ] = useState(0);
-	const myRef = useRef(null);
 	useEffect(
 		() => {
 			if (!vantaEffect) {
 				setVantaEffect(
 					NET({
-						el: myRef.current,
+						el: ref.current,
 						THREE,
 						backgroundColor: 0x1d3557,
 						color: 0x457b9d
@@ -69,14 +70,22 @@ const Hero = () => {
 	);
 	return (
 		<Layout>
-			<Background ref={myRef}>
+			<Background ref={ref}>
 				<HeroText>
 					Hello, I'm <NameSpan>Jonathan Wong</NameSpan> <br /> a front-end developer
 				</HeroText>
-				<Button>View my work</Button>
+				<Button
+					whileHover={{
+						backgroundColor: '#457b9d',
+						borderColor: '#457b9d'
+					}}
+					onClick={handleViewWork}
+				>
+					View my work
+				</Button>
 			</Background>
 		</Layout>
 	);
-};
+});
 
 export default Hero;

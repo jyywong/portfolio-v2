@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FiExternalLink } from 'react-icons/fi';
-import media, { generateMedia } from 'styled-media-query';
+import { motion } from 'framer-motion';
+import { generateMedia } from 'styled-media-query';
 const customMedia = generateMedia({
 	mLaptop: '1210px',
 	sLaptop: '1024px',
@@ -9,7 +10,7 @@ const customMedia = generateMedia({
 	lPhone: '430px',
 	mPhone: '375px'
 });
-const LiveSiteButton = styled.button`
+const LiveSiteButton = styled(motion.button)`
 	color: white;
 	background-color: #e63946;
 	border: none;
@@ -20,6 +21,7 @@ const LiveSiteButton = styled.button`
 	align-items: center;
 	justify-content: center;
 	margin-right: 8rem;
+	cursor: pointer;
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	${customMedia.lessThan('mLaptop')`
 		margin-right:0;
@@ -52,7 +54,12 @@ const ButtonText = styled.h6`
 
 const LiveButton = () => {
 	return (
-		<LiveSiteButton>
+		<LiveSiteButton
+			whileHover={{
+				scale: 1.05,
+				y: -4
+			}}
+		>
 			<ButtonText>LIVE SITE</ButtonText> <FiExternalLink />
 		</LiveSiteButton>
 	);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
 import media, { generateMedia } from 'styled-media-query';
 import styled from 'styled-components';
@@ -10,7 +11,7 @@ const customMedia = generateMedia({
 	lPhone: '430px',
 	mPhone: '375px'
 });
-const GitButton = styled.button`
+const GitButton = styled(motion.button)`
 	color: white;
 	background-color: #457b9d;
 	border: none;
@@ -20,6 +21,7 @@ const GitButton = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	${customMedia.lessThan('sLaptop')`
 	width:47.5%;
@@ -46,7 +48,12 @@ const ButtonText = styled.h6`
 `;
 const GithubButton = () => {
 	return (
-		<GitButton>
+		<GitButton
+			whileHover={{
+				scale: 1.05,
+				y: -4
+			}}
+		>
 			<ButtonText>GITHUB</ButtonText>
 			<FaGithub />
 		</GitButton>
