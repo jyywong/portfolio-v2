@@ -11,8 +11,9 @@ const customMedia = generateMedia({
 	lPhone: '430px',
 	mPhone: '375px'
 });
-const GitButton = styled(motion.button)`
+const GitButton = styled(motion.a)`
 	color: white;
+	text-decoration: none;
 	background-color: #457b9d;
 	border: none;
 	padding: 1rem;
@@ -46,13 +47,15 @@ const ButtonText = styled.h6`
 		font-size:1.5rem;
 	`};
 `;
-const GithubButton = () => {
+const GithubButton = ({ href }) => {
 	return (
 		<GitButton
 			whileHover={{
 				scale: 1.05,
 				y: -4
 			}}
+			href={href}
+			target="_blank"
 		>
 			<ButtonText>GITHUB</ButtonText>
 			<FaGithub />

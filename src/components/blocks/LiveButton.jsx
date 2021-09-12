@@ -10,8 +10,9 @@ const customMedia = generateMedia({
 	lPhone: '430px',
 	mPhone: '375px'
 });
-const LiveSiteButton = styled(motion.button)`
+const LiveSiteButton = styled(motion.a)`
 	color: white;
+	text-decoration: none;
 	background-color: #e63946;
 	border: none;
 	padding: 1rem;
@@ -52,13 +53,15 @@ const ButtonText = styled.h6`
 	`};
 `;
 
-const LiveButton = () => {
+const LiveButton = ({ href }) => {
 	return (
 		<LiveSiteButton
 			whileHover={{
 				scale: 1.05,
 				y: -4
 			}}
+			href={href}
+			target="_blank"
 		>
 			<ButtonText>LIVE SITE</ButtonText> <FiExternalLink />
 		</LiveSiteButton>

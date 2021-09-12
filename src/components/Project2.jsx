@@ -140,8 +140,9 @@ const ImageContainer = styled.div`
 		height: 100%;
 	`};
 `;
-const GitButton = styled(motion.button)`
+const GitButton = styled(motion.a)`
 	color: white;
+	text-decoration: none;
 	background-color: #1d3557;
 	border: none;
 	padding: 1rem;
@@ -501,12 +502,14 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 						More Details &rarr;
 					</ProjectDescription>
 					<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
-						<LiveButton />
+						<LiveButton href={'https://github.com/jyywong/ims_frontend'} />
 						<GitButton
 							whileHover={{
 								scale: 1.05,
 								y: -4
 							}}
+							href={'https://github.com/jyywong/ims_frontend'}
+							target="_blank"
 						>
 							<ButtonText>GITHUB</ButtonText>
 							<FaGithub />

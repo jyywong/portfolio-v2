@@ -4,6 +4,7 @@ import { generateMedia } from 'styled-media-query';
 import Layout from '../components/Layout';
 import styled from 'styled-components';
 import ProjectBlock from '../components/blocks/ProjectBlock';
+import SimpleNavbar from '../components/SimpleNavbar';
 
 const customMedia = generateMedia({
 	lLaptop: '1440px',
@@ -79,6 +80,7 @@ const AllProjects = () => {
 	return (
 		<Layout>
 			<Background>
+				<SimpleNavbar />
 				<PageHeader>All Projects</PageHeader>
 				<LineInput
 					whileFocus={{

@@ -411,7 +411,7 @@ const Project3 = forwardRef(({ project3Animate }, ref) => {
 					</ProjectDescription>
 					<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
 						<LiveButton />
-						<GithubButton />
+						<GithubButton href={'https://github.com/jyywong/Auction-House-FrontEnd'} />
 					</ButtonDiv>
 				</DescriptionDiv>
 				<BackPolygonShadowWrap>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { navigate } from 'gatsby';
 import { useMediaQuery } from '@react-hook/media-query';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import Logo from '../assets/logo.svg';
@@ -215,10 +216,17 @@ const Navbar = ({
 							>
 								Contact
 							</NavBarText>
+
 							<NavBarButton
 								whileHover={{
 									backgroundColor: 'rgba(168, 218, 220, 0.05)',
 									scale: 1.05
+								}}
+								onClick={() => {
+									navigate('/allProjects');
+								}}
+								onTouchEnd={() => {
+									navigate('/allProjects');
 								}}
 							>
 								All Projects
@@ -246,7 +254,18 @@ const Navbar = ({
 							<NavLink onClick={controlFocusContact} onTouchStart={controlFocusContact}>
 								Contact
 							</NavLink>
-							<NavBarButton style={{ marginRight: 0 }}>All Projects</NavBarButton>
+
+							<NavBarButton
+								onClick={() => {
+									navigate('/allProjects');
+								}}
+								onTouchEnd={() => {
+									navigate('/allProjects');
+								}}
+								style={{ marginRight: 0 }}
+							>
+								All Projects
+							</NavBarButton>
 						</NavMenu>
 					)}
 				</AnimatePresence>
