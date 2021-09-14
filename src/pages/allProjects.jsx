@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { generateMedia } from 'styled-media-query';
 import Layout from '../components/Layout';
 import styled from 'styled-components';
 import ProjectBlock from '../components/blocks/ProjectBlock';
 import SimpleNavbar from '../components/SimpleNavbar';
-
+import { projectList } from '../components/projectList';
 const customMedia = generateMedia({
 	lLaptop: '1440px',
 	mLaptop: '870px',
@@ -28,7 +28,7 @@ const Background = styled.div`
 `;
 
 const PageHeader = styled.div`
-	margin-top: 10rem;
+	margin-top: 6rem;
 	font-size: 6rem;
 	color: white;
 	padding: 1rem;
@@ -56,7 +56,7 @@ const LineInput = styled(motion.input)`
 	}
 `;
 
-const ProjectsContainer = styled.div`
+const ProjectsContainer = styled(motion.div)`
 	/* background-color: #fff; */
 	margin-top: 4rem;
 	width: 50vw;
@@ -77,6 +77,14 @@ const ProjectsContainer = styled.div`
 
 const AllProjects = () => {
 	const [ searchTerm, setSearchTerm ] = useState('');
+	const filterProjects = (projects) => {
+		return projects.filter(
+			({ name, description, tags }) =>
+				name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+				description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+				tags.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+		);
+	};
 	return (
 		<Layout>
 			<Background>
@@ -93,13 +101,12 @@ const AllProjects = () => {
 						setSearchTerm(e.target.value);
 					}}
 				/>
-				<ProjectsContainer>
-					<ProjectBlock />
-					<ProjectBlock />
-					<ProjectBlock />
-					<ProjectBlock />
-					<ProjectBlock />
-					<ProjectBlock />
+				<ProjectsContainer layout>
+					<AnimatePresence>
+						{filterProjects(projectList).map(({ name, description, tags }, index) => (
+							<ProjectBlock key={index} name={name} description={description} tags={tags} />
+						))}
+					</AnimatePresence>
 				</ProjectsContainer>
 			</Background>
 		</Layout>

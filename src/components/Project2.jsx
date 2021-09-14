@@ -496,8 +496,8 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 						Inventory Manager
 					</ProjectTitle>
 					<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, ab ea magnam ipsam hic at ut
-						modi doloremque corporis nam? <br />
+						A web app to help laboratories keep track of their inventory. <br /> Built using React, Redux,
+						Chakra UI. <br />
 						<br />
 						More Details &rarr;
 					</ProjectDescription>
@@ -546,7 +546,7 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 						initial={{ x: -1100 }}
 					>
 						<ImageContainer>
-							<StaticImage src="../images/TripPlannerLaptop.png" alt="website" />
+							<StaticImage src="../images/imsLaptopPort.png" alt="website" />
 						</ImageContainer>
 					</ForePolygon>
 				</ForePolygonShadowWrap>

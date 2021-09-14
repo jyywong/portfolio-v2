@@ -40,6 +40,9 @@ const NavBarButton = styled(motion.button)`
 	margin-right: 2rem;
 	cursor: pointer;
 
+	@media only screen and (max-height: 800px){
+		padding: .5rem 1rem;
+	}
 `;
 
 const TopBar = styled.div`

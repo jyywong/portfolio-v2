@@ -384,8 +384,8 @@ const Project1 = forwardRef(({ project1Animate }, ref) => {
 						Trip Planner
 					</ProjectTitle>
 					<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, ab ea magnam ipsam hic at ut
-						modi doloremque corporis nam? <br />
+						A web app to help groups plan trips collaboratively.<br /> Built using React, Redux, RTK-Query,
+						Material-UI, Framer-Motion, and Google Maps API. <br />
 						<br />
 						More Details &rarr;
 					</ProjectDescription>
