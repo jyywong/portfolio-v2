@@ -13,7 +13,11 @@ body {
 font-family: roboto;
 box-sizing: border-box;
 overflow-x: hidden;
+}
 
+#gatsby-focus-wrapper {
+	overflow: hidden;
+	height: 100vh;
 }
 
 html {

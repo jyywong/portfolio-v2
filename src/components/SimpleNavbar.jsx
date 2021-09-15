@@ -1,7 +1,6 @@
 import React from 'react';
 import { navigate } from 'gatsby';
-import { useMediaQuery } from '@react-hook/media-query';
-import { motion, useAnimation, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Logo from '../assets/logo.svg';
 import styled from 'styled-components';
 
