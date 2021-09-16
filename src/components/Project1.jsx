@@ -21,7 +21,7 @@ const customMedia = generateMedia({
 	mPhone: '375px'
 });
 
-const Background = styled.div`
+const Background = styled(motion.div)`
 	position: relative;
 	width: 100vw;
 	height: 100vh;
@@ -30,7 +30,6 @@ const Background = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-
 	scroll-snap-align: start;
 
 	${customMedia.lessThan('sLaptop')`
@@ -332,7 +331,6 @@ const BackPolygon = styled(motion.div)`
 const Project1 = forwardRef(({ project1Animate }, ref) => {
 	const [ mousePosition, setMousePosition ] = useState({ x: 0, y: 0 });
 	const [ animationCoords, setAnimationCoords ] = useState({ x: 500, y: 300 });
-
 	const controlTitle = useAnimation();
 	const controlDescription = useAnimation();
 	const controlBackPoly = useAnimation();
@@ -355,11 +353,11 @@ const Project1 = forwardRef(({ project1Animate }, ref) => {
 	};
 	const allAnimateSeq = async () => {
 		await controlTitle.start({
-			x: [ 700, 700, 0 ],
-			scale: [ 1.5, 1.5, 1 ],
+			scale: [ 1.1, 1.1, 1 ],
 			opacity: [ 0, 1, 1 ],
 			transition: { duration: 2, times: [ 0, 0.65, 1 ] }
 		});
+
 		controlDescription.start({
 			opacity: 1
 		});
@@ -382,6 +380,8 @@ const Project1 = forwardRef(({ project1Animate }, ref) => {
 				onMouseMove={(event) => {
 					setMousePosition({ x: event.clientX, y: event.clientY });
 				}}
+				project1Animate={project1Animate}
+				layout
 			>
 				<StyledTrail
 					onAnimationIteration={(event) => {

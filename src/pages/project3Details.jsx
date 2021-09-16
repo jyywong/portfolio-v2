@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'gatsby';
 import { motion, useAnimation } from 'framer-motion';
 import { useMediaQuery } from '@react-hook/media-query';
 import styled from 'styled-components';
@@ -7,6 +8,7 @@ import { generateMedia } from 'styled-media-query';
 import LiveButton from '../components/blocks/LiveButton';
 import GithubButton from '../components/blocks/GithubButton';
 import { StaticImage } from 'gatsby-plugin-image';
+import { BiChevronLeft } from 'react-icons/bi';
 
 const customMedia = generateMedia({
 	lLaptop: '1370px',
@@ -30,9 +32,9 @@ const Background = styled.div`
 	align-items: flex-start;
 	justify-content: flex-start;
 	${customMedia.lessThan('sLaptop')`
-	justify-content: space-evenly;
-	overflow:auto;
-	height:200vh;
+		justify-content: space-evenly;
+		overflow:auto;
+		height:200vh;
 	`};
 
 	scroll-snap-align: start;
@@ -40,12 +42,25 @@ const Background = styled.div`
 const SeperatorDiv = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	height: 100%;
 	width: 100%;
 	${customMedia.lessThan('sLaptop')`
 	align-items: center
 	`};
+	${customMedia.lessThan('sTablet')`
+		justify-content: space-between;
+	`};
+`;
+const Home = styled.span`
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	position: absolute;
+	font-size: 2rem;
+	color: #a8dadc;
+	top: 1.5rem;
+	left: 1.5rem;
 `;
 const DescriptionDiv = styled.div`
 	/* background-color: white; */
@@ -65,6 +80,7 @@ const DescriptionDiv = styled.div`
 	`};
 	${customMedia.lessThan('sTablet')`
 		flex-basis:25%
+		padding:0;
 	`};
 `;
 
@@ -125,6 +141,7 @@ const ButtonDiv = styled(motion.div)`
 const MiddleDiv = styled.div`
 	margin-top: 4rem;
 	display: flex;
+	align-items: center;
 	width: 100%;
 	flex-basis: 35%;
 	background-color: #457b9d;
@@ -133,15 +150,14 @@ const MiddleDiv = styled.div`
 		flex-basis:30%;
 	`}; */
 	${customMedia.lessThan('sTablet')`
-		flex-direction:column;
-		flex-basis: 30%;
+		flex-basis: 27.5%;
 	`};
-	${customMedia.lessThan('lPhone')`
-		flex-basis:35%
-	`};
+	/* ${customMedia.lessThan('lPhone')`
+		flex-basis:2%
+	`}; */
 	${customMedia.lessThan('mPhone')`
 		padding: 2rem;
-		flex-basis:40%
+		flex-basis:30%
 	`};
 `;
 
@@ -153,6 +169,7 @@ const FeaturesContainer = styled.div`
 	width: 75%;
 	${customMedia.lessThan('sTablet')`
 		justify-content:space-evenly;
+		height:auto;
 	`};
 `;
 const SubHeading = styled.h4`
@@ -183,6 +200,18 @@ const SubDescription = styled.p`
 	`};
 `;
 
+const CenteringContainer = styled.div`
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	height: min-content;
+	${customMedia.lessThan('sTablet')`
+		height: 100%;
+		flex-direction:column;
+		justify-content: space-evenly;
+	`};
+`;
+
 const Features = styled.div`
 	display: flex;
 	justify-content: center;
@@ -209,7 +238,6 @@ const Technologies = styled.div`
 	`};
 `;
 const TechHeading = styled.h5`
-	margin-top: 1rem;
 	font-size: 1.5rem;
 	color: white;
 `;
@@ -462,6 +490,11 @@ const Project1Details = () => {
 	return (
 		<Layout>
 			<Background>
+				<Link to="/">
+					<Home>
+						<BiChevronLeft /> Home
+					</Home>
+				</Link>
 				<SeperatorDiv>
 					<DescriptionDiv>
 						<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
@@ -484,36 +517,36 @@ const Project1Details = () => {
 						</PolygonContainer>
 					)}
 					<MiddleDiv>
-						<Features>
-							<FeaturesContainer>
-								<SubHeading>What can the user do?</SubHeading>
-								<SubDescription>
-									Users can submit a buy or sell order, and see other buy or sell orders. Users can
-									also see the average price of textbooks in the past to judge the market.
-								</SubDescription>
-							</FeaturesContainer>
-						</Features>
-						<Features>
-							<FeaturesContainer>
-								<SubHeading>What did I learn?</SubHeading>
-								<SubDescription>
-									This was my first project using React. Building this project helped me learn the
-									basics of React, such as state, controlled components, useEffect, and using JSX. I
-									also learned how to use Fetch to consume data from the API I build in Django.
-									Finally, I also learned how to implement JWT authentication on both the front end
-									and back end.
-								</SubDescription>
-							</FeaturesContainer>
-						</Features>
+						<CenteringContainer>
+							<Features>
+								<FeaturesContainer>
+									<SubHeading>What can the user do?</SubHeading>
+									<SubDescription>
+										Users can submit a buy or sell order, and see other buy or sell orders. Users
+										can also see the average price of textbooks in the past to judge the market.
+									</SubDescription>
+								</FeaturesContainer>
+							</Features>
+							<Features>
+								<FeaturesContainer>
+									<SubHeading>What did I learn?</SubHeading>
+									<SubDescription>
+										This was my first project using React. Building this project helped me learn the
+										basics of React, such as state, controlled components, useEffect, and using JSX.
+										I also learned how to use Fetch to consume data from the API I build in Django.
+										Finally, I also learned how to implement JWT authentication on both the front
+										end and back end.
+									</SubDescription>
+								</FeaturesContainer>
+							</Features>
+						</CenteringContainer>
 					</MiddleDiv>
 					<Technologies>
 						<TechHeading>Technologies used</TechHeading>
 						<TechContainer>
 							<TechItem>React</TechItem>
-							<TechItem>Redux</TechItem>
-							<TechItem>RTK</TechItem>
-							<TechItem>Material UI</TechItem>
-							<TechItem>Framer Motion</TechItem>
+							<TechItem>Bootstrap</TechItem>
+							<TechItem>Fetch</TechItem>
 						</TechContainer>
 					</Technologies>
 				</SeperatorDiv>

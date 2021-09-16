@@ -365,8 +365,7 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 	};
 	const allAnimateSeq = async () => {
 		await controlTitle.start({
-			x: [ -700, -700, 0 ],
-			scale: [ 1.5, 1.5, 1 ],
+			scale: [ 1.1, 1.1, 1 ],
 			opacity: [ 0, 1, 1 ],
 			transition: { duration: 2, times: [ 0, 0.65, 1 ] }
 		});
@@ -516,7 +515,7 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 						A web app to help laboratories keep track of their inventory. <br /> Built using React, Redux,
 						Chakra UI. <br />
 						<br />
-						<StyledLink to="/project1Details">
+						<StyledLink to="/project2Details">
 							<MoreDetails
 								whileHover={{
 									color: 'white'

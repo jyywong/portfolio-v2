@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'gatsby';
 import { motion, useAnimation } from 'framer-motion';
 import { useMediaQuery } from '@react-hook/media-query';
 import styled from 'styled-components';
@@ -6,6 +7,7 @@ import Layout from '../components/Layout';
 import { generateMedia } from 'styled-media-query';
 import LiveButton from '../components/blocks/LiveButton';
 import GithubButton from '../components/blocks/GithubButton';
+import { BiChevronLeft } from 'react-icons/bi';
 import { StaticImage } from 'gatsby-plugin-image';
 
 const customMedia = generateMedia({
@@ -47,11 +49,22 @@ const SeperatorDiv = styled.div`
 	align-items: center
 	`};
 `;
+
+const Home = styled.span`
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	position: absolute;
+	font-size: 2rem;
+	color: #a8dadc;
+	top: 1.5rem;
+	left: 1.5rem;
+`;
 const DescriptionDiv = styled.div`
 	/* background-color: white; */
 	/* flex-basis: 40%; */
 	width: 45%;
-	margin-top: 4rem;
+	margin-top: 10rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -69,15 +82,15 @@ const DescriptionDiv = styled.div`
 `;
 
 const ProjectTitle = styled(motion.h1)`
-	font-size: 6rem;
+	font-size: 6.5rem;
 	color: white;
 	z-index:10;
 	${customMedia.lessThan('lLaptop')`
-		font-size: 7.5rem;
+		font-size: 5.5rem;
 		
 	`};
 	${customMedia.lessThan('mLaptop')`
-		font-size: 7rem;
+		font-size: 4.7rem;
 		
 	`};
 	${customMedia.lessThan('sTablet')`
@@ -123,8 +136,9 @@ const ButtonDiv = styled(motion.div)`
 `;
 
 const MiddleDiv = styled.div`
-	margin-top: 4rem;
+	margin-top: 8rem;
 	display: flex;
+	align-items: center;
 	width: 100%;
 	flex-basis: 35%;
 	background-color: #457b9d;
@@ -133,15 +147,14 @@ const MiddleDiv = styled.div`
 		flex-basis:30%;
 	`}; */
 	${customMedia.lessThan('sTablet')`
-		flex-direction:column;
-		flex-basis: 30%;
+		flex-basis: 25%;
 	`};
 	${customMedia.lessThan('lPhone')`
-		flex-basis:35%
+		flex-basis:30%
 	`};
 	${customMedia.lessThan('mPhone')`
 		padding: 2rem;
-		flex-basis:40%
+		flex-basis:30%
 	`};
 `;
 
@@ -182,21 +195,30 @@ const SubDescription = styled.p`
 		font-size: 1.2rem;
 	`};
 `;
+const CenteringContainer = styled.div`
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	height: min-content;
+	${customMedia.lessThan('sTablet')`
+		height: 100%;
+		flex-direction:column;
+		justify-content:space-evenly;
+	`};
+`;
 
 const Features = styled.div`
 	display: flex;
 	justify-content: center;
-	align-items: flex-start;
+	align-items: center;
 	flex-basis: 50%;
-	height: 100%;
-	margin-top: 4rem;
 `;
 const Technologies = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
 	flex-direction: column;
-	flex-basis: 10%;
+	flex-basis: 15%;
 	${customMedia.lessThan('sLaptop')`
 		width:100%;
 	`};
@@ -210,7 +232,6 @@ const Technologies = styled.div`
 	`};
 `;
 const TechHeading = styled.h5`
-	margin-top: 1rem;
 	font-size: 1.5rem;
 	color: white;
 `;
@@ -463,6 +484,11 @@ const Project1Details = () => {
 	return (
 		<Layout>
 			<Background>
+				<Link to="/">
+					<Home>
+						<BiChevronLeft /> Home
+					</Home>
+				</Link>
 				<SeperatorDiv>
 					<DescriptionDiv>
 						<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
@@ -486,27 +512,29 @@ const Project1Details = () => {
 						</PolygonContainer>
 					)}
 					<MiddleDiv>
-						<Features>
-							<FeaturesContainer>
-								<SubHeading>What can the user do?</SubHeading>
-								<SubDescription>
-									Users can invite other members to a "lab" where all users can see and edit
-									inventory. Some notable features: Alert users to items with low stock, charts show
-									usage history of all items, request orders for an item.
-								</SubDescription>
-							</FeaturesContainer>
-						</Features>
-						<Features>
-							<FeaturesContainer>
-								<SubHeading>What did I learn?</SubHeading>
-								<SubDescription>
-									This was my first project using Redux. Learned how to understand and use base Redux,
-									and how to pair it with async API calls using Redux Thunks and Axios. Learned how to
-									use Chakra UI to quickly build a UI. Continued to learn how to test with React
-									Testing Library and Cypress.
-								</SubDescription>
-							</FeaturesContainer>
-						</Features>
+						<CenteringContainer>
+							<Features>
+								<FeaturesContainer>
+									<SubHeading>What can the user do?</SubHeading>
+									<SubDescription>
+										Users can invite other members to a "lab" where all users can see and edit
+										inventory. Some notable features: Alert users to items with low stock, charts
+										show usage history of all items, request orders for an item.
+									</SubDescription>
+								</FeaturesContainer>
+							</Features>
+							<Features>
+								<FeaturesContainer>
+									<SubHeading>What did I learn?</SubHeading>
+									<SubDescription>
+										This was my first project using Redux. Learned how to understand and use base
+										Redux, and how to pair it with async API calls using Redux Thunks and Axios.
+										Learned how to use Chakra UI to quickly build a UI. Continued to learn how to
+										test with React Testing Library and Cypress.
+									</SubDescription>
+								</FeaturesContainer>
+							</Features>
+						</CenteringContainer>
 					</MiddleDiv>
 					<Technologies>
 						<TechHeading>Technologies used</TechHeading>

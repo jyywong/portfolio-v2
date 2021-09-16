@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styled from 'styled-components';
 import Hero from '../components/Hero';
 import '@fontsource/roboto';
+import MainLayout from '../components/MainLayout';
 import Skills from '../components/Skills';
 import Project1 from '../components/Project1';
 import Project2 from '../components/Project2';
@@ -135,25 +136,27 @@ const IndexPage = () => {
 
 	return (
 		<React.Fragment>
-			<ScrollContainer className="scrollContainer" onScroll={handleScroll}>
-				<Navbar
-					navInteract={navInteract}
-					setNavInteract={setNavInteract}
-					navstatus={navStatus}
-					setNavStatus={setNavStatus}
-					handleBackToTop={handleBackToTop}
-					handleViewSkill={handleViewSkill}
-					handleViewWork={handleViewWork}
-					handleViewContact={handleViewContact}
-				/>
-				<Hero ref={heroRef} handleViewWork={handleViewWork} />
-				<Skills ref={skillsRef} skillsAnimate={skillsAnimate} />
-				<Project1 ref={project1Ref} project1Animate={project1Animate} />
-				<Project2 ref={project2Ref} project2Animate={project2Animate} />
-				<Project3 ref={project3Ref} project3Animate={project3Animate} />
-				<Contact ref={contactRef} handleBackToTop={handleBackToTop} />
-				{/* <ProjectDetails /> */}
-			</ScrollContainer>
+			<MainLayout>
+				<ScrollContainer className="scrollContainer" onScroll={handleScroll}>
+					<Navbar
+						navInteract={navInteract}
+						setNavInteract={setNavInteract}
+						navstatus={navStatus}
+						setNavStatus={setNavStatus}
+						handleBackToTop={handleBackToTop}
+						handleViewSkill={handleViewSkill}
+						handleViewWork={handleViewWork}
+						handleViewContact={handleViewContact}
+					/>
+					<Hero ref={heroRef} handleViewWork={handleViewWork} />
+					<Skills ref={skillsRef} skillsAnimate={skillsAnimate} />
+					<Project1 ref={project1Ref} project1Animate={project1Animate} />
+					<Project2 ref={project2Ref} project2Animate={project2Animate} />
+					<Project3 ref={project3Ref} project3Animate={project3Animate} />
+					<Contact ref={contactRef} handleBackToTop={handleBackToTop} />
+					{/* <ProjectDetails /> */}
+				</ScrollContainer>
+			</MainLayout>
 		</React.Fragment>
 	);
 };

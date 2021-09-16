@@ -7,6 +7,8 @@ import { generateMedia } from 'styled-media-query';
 import LiveButton from '../components/blocks/LiveButton';
 import GithubButton from '../components/blocks/GithubButton';
 import { StaticImage } from 'gatsby-plugin-image';
+import { BiChevronLeft } from 'react-icons/bi';
+import { Link } from 'gatsby';
 
 const customMedia = generateMedia({
 	lLaptop: '1370px',
@@ -46,6 +48,17 @@ const SeperatorDiv = styled.div`
 	${customMedia.lessThan('sLaptop')`
 	align-items: center
 	`};
+`;
+
+const Home = styled.span`
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	position: absolute;
+	font-size: 2rem;
+	color: #a8dadc;
+	top: 1.5rem;
+	left: 1.5rem;
 `;
 const DescriptionDiv = styled.div`
 	/* background-color: white; */
@@ -125,23 +138,24 @@ const ButtonDiv = styled(motion.div)`
 const MiddleDiv = styled.div`
 	margin-top: 4rem;
 	display: flex;
+	align-items: center;
 	width: 100%;
 	flex-basis: 35%;
 	background-color: #457b9d;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+
 	/* ${customMedia.lessThan('sLaptop')`
 		flex-basis:30%;
 	`}; */
 	${customMedia.lessThan('sTablet')`
-		flex-direction:column;
-		flex-basis: 30%;
+		flex-basis: 25%;
 	`};
 	${customMedia.lessThan('lPhone')`
 		flex-basis:35%
 	`};
 	${customMedia.lessThan('mPhone')`
 		padding: 2rem;
-		flex-basis:40%
+		flex-basis:30%
 	`};
 `;
 
@@ -183,19 +197,29 @@ const SubDescription = styled.p`
 	`};
 `;
 
+const CenteringContainer = styled.div`
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	height: min-content;
+	${customMedia.lessThan('sTablet')`
+		height: 100%;
+		flex-direction:column;
+		justify-content:space-evenly;
+	`};
+`;
 const Features = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-basis: 50%;
-	height: 100%;
 `;
 const Technologies = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
 	flex-direction: column;
-	flex-basis: 10%;
+	flex-basis: 15%;
 	${customMedia.lessThan('sLaptop')`
 		width:100%;
 	`};
@@ -209,7 +233,6 @@ const Technologies = styled.div`
 	`};
 `;
 const TechHeading = styled.h5`
-	margin-top: 1rem;
 	font-size: 1.5rem;
 	color: white;
 `;
@@ -462,6 +485,12 @@ const Project1Details = () => {
 	return (
 		<Layout>
 			<Background>
+				<Link to="/">
+					<Home>
+						<BiChevronLeft /> Home
+					</Home>
+				</Link>
+
 				<SeperatorDiv>
 					<DescriptionDiv>
 						<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
@@ -485,27 +514,29 @@ const Project1Details = () => {
 						</PolygonContainer>
 					)}
 					<MiddleDiv>
-						<Features>
-							<FeaturesContainer>
-								<SubHeading>What can the user do?</SubHeading>
-								<SubDescription>
-									Users can add events to a trip. Users can also suggest an event where members of the
-									trip can vote on whether or not to add it to the trip. Users can also suggest an
-									alternative to an already existing event.
-								</SubDescription>
-							</FeaturesContainer>
-						</Features>
-						<Features>
-							<FeaturesContainer>
-								<SubHeading>What did I learn?</SubHeading>
-								<SubDescription>
-									The purpose of this project was to solidify my understanding of Redux and Framer
-									Motion. With this project I learned to use RTK-Query to integrate the API calls with
-									the redux store. I also soldified my understanding of CSS grid and making smooth
-									animations with Framer Motion.
-								</SubDescription>
-							</FeaturesContainer>
-						</Features>
+						<CenteringContainer>
+							<Features>
+								<FeaturesContainer>
+									<SubHeading>What can the user do?</SubHeading>
+									<SubDescription>
+										Users can add events to a trip. Users can also suggest an event where members of
+										the trip can vote on whether or not to add it to the trip. Users can also
+										suggest an alternative to an already existing event.
+									</SubDescription>
+								</FeaturesContainer>
+							</Features>
+							<Features>
+								<FeaturesContainer>
+									<SubHeading>What did I learn?</SubHeading>
+									<SubDescription>
+										The purpose of this project was to solidify my understanding of Redux and Framer
+										Motion. With this project I learned to use RTK-Query to integrate the API calls
+										with the redux store. I also soldified my understanding of CSS grid and making
+										smooth animations with Framer Motion.
+									</SubDescription>
+								</FeaturesContainer>
+							</Features>
+						</CenteringContainer>
 					</MiddleDiv>
 					<Technologies>
 						<TechHeading>Technologies used</TechHeading>
