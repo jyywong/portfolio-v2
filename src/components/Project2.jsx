@@ -4,8 +4,10 @@ import { useMediaQuery } from '@react-hook/media-query';
 import { StaticImage } from 'gatsby-plugin-image';
 import { generateMedia } from 'styled-media-query';
 import { FaGithub } from 'react-icons/fa';
-import Matter, { Engine, Render, World, Bodies, MouseConstraint } from 'matter-js';
+import Matter, { World, Bodies, MouseConstraint } from 'matter-js';
+import { Link } from 'gatsby';
 
+import { BiChevronRight } from 'react-icons/bi';
 import Layout from './Layout';
 import styled from 'styled-components';
 import LiveButton from './blocks/LiveButton';
@@ -97,6 +99,21 @@ const ProjectDescription = styled(motion.h4)`
 		font-size:1.3rem;
 	`};
 `;
+
+const StyledLink = styled(Link)`
+	text-decoration: none;
+	color: #a8dadc;
+	
+`;
+
+const MoreDetails = styled(motion.span)`
+
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+`;
+
 const ButtonDiv = styled(motion.div)`
 	display: flex;
 	margin-top: 4rem;
@@ -499,7 +516,15 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 						A web app to help laboratories keep track of their inventory. <br /> Built using React, Redux,
 						Chakra UI. <br />
 						<br />
-						More Details &rarr;
+						<StyledLink to="/project1Details">
+							<MoreDetails
+								whileHover={{
+									color: 'white'
+								}}
+							>
+								More Details<BiChevronRight />
+							</MoreDetails>
+						</StyledLink>
 					</ProjectDescription>
 					<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
 						<LiveButton href={'https://github.com/jyywong/ims_frontend'} />

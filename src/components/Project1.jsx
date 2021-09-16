@@ -2,8 +2,10 @@ import React, { forwardRef, useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { StaticImage } from 'gatsby-plugin-image';
 import { generateMedia } from 'styled-media-query';
+import { Link } from 'gatsby';
 import MaskTrail from '../assets/maskTrail.svg';
 
+import { BiChevronRight } from 'react-icons/bi';
 import Layout from './Layout';
 import styled, { keyframes } from 'styled-components';
 import LiveButton from './blocks/LiveButton';
@@ -143,6 +145,17 @@ const ProjectDescription = styled(motion.h4)`
 	${customMedia.lessThan('mPhone')`
 		font-size:1.3rem;
 	`};
+`;
+
+const StyledLink = styled(Link)`
+	text-decoration: none;
+	color: #a8dadc;
+`;
+
+const MoreDetails = styled(motion.span)`
+	cursor: pointer;
+	display: flex;
+	align-items: center;
 `;
 const ButtonDiv = styled(motion.div)`
 	display: flex;
@@ -387,7 +400,15 @@ const Project1 = forwardRef(({ project1Animate }, ref) => {
 						A web app to help groups plan trips collaboratively.<br /> Built using React, Redux, RTK-Query,
 						Material-UI, Framer-Motion, and Google Maps API. <br />
 						<br />
-						More Details &rarr;
+						<StyledLink to="/project1Details">
+							<MoreDetails
+								whileHover={{
+									color: 'white'
+								}}
+							>
+								More Details<BiChevronRight />
+							</MoreDetails>
+						</StyledLink>
 					</ProjectDescription>
 					<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
 						<LiveButton />

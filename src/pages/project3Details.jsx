@@ -69,7 +69,7 @@ const DescriptionDiv = styled.div`
 `;
 
 const ProjectTitle = styled(motion.h1)`
-	font-size: 9rem;
+	font-size: 7rem;
 	color: white;
 	z-index:10;
 	${customMedia.lessThan('lLaptop')`
@@ -147,7 +147,7 @@ const MiddleDiv = styled.div`
 
 const FeaturesContainer = styled.div`
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
 	flex-direction: column;
 	height: 50%;
 	width: 75%;
@@ -465,11 +465,10 @@ const Project1Details = () => {
 				<SeperatorDiv>
 					<DescriptionDiv>
 						<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
-							Trip Planner
+							Textbook Auction
 						</ProjectTitle>
 						<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
-							A web app to help groups plan trips collaboratively.<br /> Built using React, Redux,
-							RTK-Query, Material-UI, Framer-Motion, and Google Maps API. <br />
+							A web app to help students sell and buy used textbooks. Built using React, and Bootstrap.
 						</ProjectDescription>
 						<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
 							<LiveButton />
@@ -489,9 +488,8 @@ const Project1Details = () => {
 							<FeaturesContainer>
 								<SubHeading>What can the user do?</SubHeading>
 								<SubDescription>
-									Users can add events to a trip. Users can also suggest an event where members of the
-									trip can vote on whether or not to add it to the trip. Users can also suggest an
-									alternative to an already existing event.
+									Users can submit a buy or sell order, and see other buy or sell orders. Users can
+									also see the average price of textbooks in the past to judge the market.
 								</SubDescription>
 							</FeaturesContainer>
 						</Features>
@@ -499,10 +497,11 @@ const Project1Details = () => {
 							<FeaturesContainer>
 								<SubHeading>What did I learn?</SubHeading>
 								<SubDescription>
-									The purpose of this project was to solidify my understanding of Redux and Framer
-									Motion. With this project I learned to use RTK-Query to integrate the API calls with
-									the redux store. I also soldified my understanding of CSS grid and making smooth
-									animations with Framer Motion.
+									This was my first project using React. Building this project helped me learn the
+									basics of React, such as state, controlled components, useEffect, and using JSX. I
+									also learned how to use Fetch to consume data from the API I build in Django.
+									Finally, I also learned how to implement JWT authentication on both the front end
+									and back end.
 								</SubDescription>
 							</FeaturesContainer>
 						</Features>

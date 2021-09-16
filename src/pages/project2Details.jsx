@@ -69,11 +69,11 @@ const DescriptionDiv = styled.div`
 `;
 
 const ProjectTitle = styled(motion.h1)`
-	font-size: 9rem;
+	font-size: 6rem;
 	color: white;
 	z-index:10;
 	${customMedia.lessThan('lLaptop')`
-		font-size: 8.5rem;
+		font-size: 7.5rem;
 		
 	`};
 	${customMedia.lessThan('mLaptop')`
@@ -91,7 +91,7 @@ const ProjectTitle = styled(motion.h1)`
 	`};
 `;
 const ProjectDescription = styled(motion.h4)`
-	font-size: 2.5rem;
+	font-size: 2rem;
 	color: #a8dadc;
 	font-weight: 100;
 	hyphens: auto;
@@ -186,9 +186,10 @@ const SubDescription = styled.p`
 const Features = styled.div`
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	flex-basis: 50%;
 	height: 100%;
+	margin-top: 4rem;
 `;
 const Technologies = styled.div`
 	display: flex;
@@ -465,11 +466,11 @@ const Project1Details = () => {
 				<SeperatorDiv>
 					<DescriptionDiv>
 						<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
-							Trip Planner
+							Inventory Manager
 						</ProjectTitle>
 						<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
-							A web app to help groups plan trips collaboratively.<br /> Built using React, Redux,
-							RTK-Query, Material-UI, Framer-Motion, and Google Maps API. <br />
+							A web app to help laboratories keep track of their inventory.<br />
+							Built using React, Redux, Chakra UI.
 						</ProjectDescription>
 						<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
 							<LiveButton />
@@ -489,9 +490,9 @@ const Project1Details = () => {
 							<FeaturesContainer>
 								<SubHeading>What can the user do?</SubHeading>
 								<SubDescription>
-									Users can add events to a trip. Users can also suggest an event where members of the
-									trip can vote on whether or not to add it to the trip. Users can also suggest an
-									alternative to an already existing event.
+									Users can invite other members to a "lab" where all users can see and edit
+									inventory. Some notable features: Alert users to items with low stock, charts show
+									usage history of all items, request orders for an item.
 								</SubDescription>
 							</FeaturesContainer>
 						</Features>
@@ -499,10 +500,10 @@ const Project1Details = () => {
 							<FeaturesContainer>
 								<SubHeading>What did I learn?</SubHeading>
 								<SubDescription>
-									The purpose of this project was to solidify my understanding of Redux and Framer
-									Motion. With this project I learned to use RTK-Query to integrate the API calls with
-									the redux store. I also soldified my understanding of CSS grid and making smooth
-									animations with Framer Motion.
+									This was my first project using Redux. Learned how to understand and use base Redux,
+									and how to pair it with async API calls using Redux Thunks and Axios. Learned how to
+									use Chakra UI to quickly build a UI. Continued to learn how to test with React
+									Testing Library and Cypress.
 								</SubDescription>
 							</FeaturesContainer>
 						</Features>
@@ -512,9 +513,9 @@ const Project1Details = () => {
 						<TechContainer>
 							<TechItem>React</TechItem>
 							<TechItem>Redux</TechItem>
-							<TechItem>RTK</TechItem>
-							<TechItem>Material UI</TechItem>
-							<TechItem>Framer Motion</TechItem>
+							<TechItem>Redux Thunks</TechItem>
+							<TechItem>Chakra UI</TechItem>
+							<TechItem>React Testing Library</TechItem>
 						</TechContainer>
 					</Technologies>
 				</SeperatorDiv>
@@ -552,7 +553,7 @@ const Project1Details = () => {
 								initial={{ x: 1100 }}
 							>
 								<ImageContainer>
-									<StaticImage src="../images/TripPlannerLaptop.png" alt="website" />
+									<StaticImage src="../images/imsLaptopPort.png" alt="website" />
 								</ImageContainer>
 							</ForePolygon>
 						</ForePolygonShadowWrap>

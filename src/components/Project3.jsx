@@ -3,6 +3,8 @@ import { motion, useAnimation } from 'framer-motion';
 import { StaticImage } from 'gatsby-plugin-image';
 import { generateMedia } from 'styled-media-query';
 import Layout from './Layout';
+import { Link } from 'gatsby';
+import { BiChevronRight } from 'react-icons/bi';
 import styled, { keyframes } from 'styled-components';
 import LiveButton from './blocks/LiveButton';
 import GithubButton from './blocks/GithubButton';
@@ -168,6 +170,16 @@ const ProjectDescription = styled(motion.h4)`
 	${customMedia.lessThan('mPhone')`
 		font-size:1.3rem;
 	`};
+`;
+const StyledLink = styled(Link)`
+	text-decoration: none;
+	color: #a8dadc;
+`;
+
+const MoreDetails = styled(motion.span)`
+	cursor: pointer;
+	display: flex;
+	align-items: center;
 `;
 const ButtonDiv = styled(motion.div)`
 	display: flex;
@@ -407,7 +419,15 @@ const Project3 = forwardRef(({ project3Animate }, ref) => {
 						A web app to help students sell and buy used textbooks. <br />Built using React, and Bootstrap.{' '}
 						<br />
 						<br />
-						More Details &rarr;
+						<StyledLink to="/project1Details">
+							<MoreDetails
+								whileHover={{
+									color: 'white'
+								}}
+							>
+								More Details<BiChevronRight />
+							</MoreDetails>
+						</StyledLink>
 					</ProjectDescription>
 					<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
 						<LiveButton />
