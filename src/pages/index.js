@@ -77,7 +77,6 @@ const IndexPage = () => {
 			if (currentScroll > previousScroll.current) {
 				if (!navInteract) {
 					setTimeout(() => {
-						console.log('navInteract', navInteract);
 						setNavStatus('disappear');
 					}, 1500);
 				}
@@ -87,7 +86,6 @@ const IndexPage = () => {
 		}
 
 		previousScroll.current = currentScroll;
-		console.log(previousScroll.current);
 	};
 
 	useEffect(() => {

@@ -80,6 +80,7 @@ const Hero = forwardRef(({ handleViewWork }, ref) => {
 						borderColor: '#457b9d'
 					}}
 					onClick={handleViewWork}
+					onTouchEnd={handleViewWork}
 				>
 					View my work
 				</Button>

@@ -22,11 +22,6 @@ overflow-x: hidden;
 
 #gatsby-focus-wrapper {
 	overflow: hidden;
-	height: 100vh;
-	${customMedia.lessThan('sLaptop')`
-		height:200vh;
-		// overflow:auto;
-	`};
 
 }
 

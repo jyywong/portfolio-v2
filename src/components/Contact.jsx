@@ -177,6 +177,7 @@ const Contact = forwardRef(({ handleBackToTop }, ref) => {
 						y: -5
 					}}
 					onClick={handleBackToTop}
+					onTouchEnd={handleBackToTop}
 				>
 					<HiChevronDoubleUp />
 				</ReturnTop>
