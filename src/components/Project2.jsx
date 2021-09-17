@@ -319,6 +319,7 @@ const BackPolygon = styled(motion.div)`
 `;
 
 const Project2 = forwardRef(({ project2Animate }, ref) => {
+	const touchScreen = useMediaQuery('(hover:none)');
 	const laptopMatch = useMediaQuery('only screen and (max-width:1024px)');
 	const tabletMatch = useMediaQuery('only screen and (max-width:700px)');
 	const phoneMatch = useMediaQuery('only screen and (max-width:700px)');
@@ -326,6 +327,7 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 
 	const boxRef = useRef(null);
 	const canvasRef = useRef(null);
+	let render = useRef(null);
 
 	const [ constraints, setConstraints ] = useState();
 	const [ scene, setScene ] = useState();
@@ -336,12 +338,16 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 	const handleClick = (event) => {
 		console.log('click');
 		console.log(event);
-		const mouseX = scene.engine.world.constraints[0].pointA.x;
-		const mouseY = scene.engine.world.constraints[0].pointA.y;
 		const randomWidth = Math.floor(Math.random() * (120 - 75 + 1) + 75);
 		const randomHeight = Math.floor(Math.random() * (120 - 75 + 1) + 75);
-
-		World.add(scene.engine.world, Bodies.rectangle(mouseX, mouseY, randomWidth, randomHeight));
+		if (!touchScreen) {
+			const mouseX = scene.engine.world.constraints[0].pointA.x;
+			const mouseY = scene.engine.world.constraints[0].pointA.y;
+			World.add(scene.engine.world, Bodies.rectangle(mouseX, mouseY, randomWidth, randomHeight));
+		} else {
+			World.add(scene.engine.world, Bodies.rectangle(canvasRef.current.width / 2, 0, randomWidth, randomHeight));
+		}
+		console.log(canvasRef.current.width);
 	};
 
 	const controlTitle = useAnimation();
@@ -441,10 +447,12 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 					angle: Math.PI * 0.15
 				}
 			);
-
-			const mConstraint = MouseConstraint.create(engine);
-
-			World.add(engine.world, [ floor, randomBox, randomBox2, randomBox3, mConstraint ]);
+			if (!touchScreen) {
+				const mConstraint = MouseConstraint.create(engine);
+				World.add(engine.world, [ floor, randomBox, randomBox2, randomBox3, mConstraint ]);
+			} else {
+				World.add(engine.world, [ floor, randomBox, randomBox2, randomBox3 ]);
+			}
 
 			Engine.run(engine);
 			Render.run(render);
@@ -456,7 +464,7 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 				window.removeEventListener('resize', handleResize);
 			};
 		},
-		[ project2Animate ]
+		[ project2Animate, touchScreen ]
 	);
 
 	useEffect(
@@ -541,34 +549,13 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 					</ButtonDiv>
 				</DescriptionDiv>
 				<BackPolygonShadowWrap>
-					<BackPolygon
-						whileHover={{
-							scale: 1.05,
-							transition: { type: 'spring', mass: 1 }
-						}}
-						animate={controlBackPoly}
-						initial={{ x: -1100 }}
-					/>
+					<BackPolygon animate={controlBackPoly} initial={{ x: -1100 }} />
 				</BackPolygonShadowWrap>
 				<MidPolygonShadowWrap>
-					<MidPolygon
-						whileHover={{
-							scale: 1.05,
-							transition: { type: 'spring', mass: 1 }
-						}}
-						animate={controlMidPoly}
-						initial={{ x: -1100 }}
-					/>
+					<MidPolygon animate={controlMidPoly} initial={{ x: -1100 }} />
 				</MidPolygonShadowWrap>
 				<ForePolygonShadowWrap>
-					<ForePolygon
-						whileHover={{
-							scale: 1.05,
-							transition: { type: 'spring', mass: 1 }
-						}}
-						animate={controlForePoly}
-						initial={{ x: -1100 }}
-					>
+					<ForePolygon animate={controlForePoly} initial={{ x: -1100 }}>
 						<ImageContainer>
 							<StaticImage src="../images/imsLaptopPort.png" alt="website" />
 						</ImageContainer>

@@ -416,34 +416,13 @@ const Project1 = forwardRef(({ project1Animate }, ref) => {
 					</ButtonDiv>
 				</DescriptionDiv>
 				<BackPolygonShadowWrap>
-					<BackPolygon
-						whileHover={{
-							scale: 1.05,
-							transition: { type: 'spring', mass: 1 }
-						}}
-						animate={controlBackPoly}
-						initial={{ x: 1100 }}
-					/>
+					<BackPolygon animate={controlBackPoly} initial={{ x: 1100 }} />
 				</BackPolygonShadowWrap>
 				<MidPolygonShadowWrap>
-					<MidPolygon
-						whileHover={{
-							scale: 1.05,
-							transition: { type: 'spring', mass: 1 }
-						}}
-						animate={controlMidPoly}
-						initial={{ x: 1100 }}
-					/>
+					<MidPolygon animate={controlMidPoly} initial={{ x: 1100 }} />
 				</MidPolygonShadowWrap>
 				<ForePolygonShadowWrap>
-					<ForePolygon
-						whileHover={{
-							scale: 1.05,
-							transition: { type: 'spring', mass: 1 }
-						}}
-						animate={controlForePoly}
-						initial={{ x: 1100 }}
-					>
+					<ForePolygon animate={controlForePoly} initial={{ x: 1100 }}>
 						<ImageContainer>
 							<StaticImage src="../images/TripPlannerLaptop.png" alt="website" />
 						</ImageContainer>

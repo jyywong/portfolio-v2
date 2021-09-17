@@ -172,9 +172,6 @@ const Navbar = ({
 					{tabletMatch ? (
 						<HamburgerContainer
 							onClick={() => {
-								setIsClicked(!isClicked);
-							}}
-							onTouchStart={() => {
 								if (!isClicked) {
 									setNavInteract(true);
 								} else {

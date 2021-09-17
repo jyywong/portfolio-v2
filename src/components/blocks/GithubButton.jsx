@@ -47,6 +47,7 @@ const ButtonText = styled.h6`
 		font-size:1.5rem;
 	`};
 `;
+
 const GithubButton = ({ href }) => {
 	return (
 		<GitButton
