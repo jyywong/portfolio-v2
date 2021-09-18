@@ -1,10 +1,11 @@
-import React, { forwardRef } from 'react';
+import React, { useState, forwardRef } from 'react';
 import Layout from './Layout';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { generateMedia } from 'styled-media-query';
 import { HiChevronDoubleUp } from 'react-icons/hi';
 import Triangle from '../assets/triangle.svg';
+import { createContact } from '../services/services';
 
 const customMedia = generateMedia({
 	sTablet: '580px',
@@ -138,6 +139,13 @@ const ReturnTop = styled(motion.button)`
 	`};
 `;
 const Contact = forwardRef(({ handleBackToTop }, ref) => {
+	const [ formValues, setFormValues ] = useState({ name: '', email: '', message: '' });
+
+	const handleSubmit = () => {
+		const { name, email, message } = formValues;
+		createContact(name, email, message).catch((error) => console.log(error.response));
+		setFormValues({ name: '', email: '', message: '' });
+	};
 	return (
 		<Layout>
 			<Background ref={ref}>
@@ -151,6 +159,8 @@ const Contact = forwardRef(({ handleBackToTop }, ref) => {
 							boxShadow: ' 0 0 0 4px rgb(69, 123, 157, 0.4)'
 						}}
 						placeholder="Name"
+						value={formValues.name}
+						onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
 					/>
 					<LineInput
 						whileFocus={{
@@ -158,6 +168,8 @@ const Contact = forwardRef(({ handleBackToTop }, ref) => {
 							boxShadow: ' 0 0 0 4px rgb(69, 123, 157, 0.4)'
 						}}
 						placeholder="Email"
+						value={formValues.email}
+						onChange={(e) => setFormValues({ ...formValues, email: e.target.value })}
 					/>
 					<MultiLineInput
 						whileFocus={{
@@ -166,8 +178,13 @@ const Contact = forwardRef(({ handleBackToTop }, ref) => {
 						}}
 						placeholder="Your message"
 						rows="5"
+						value={formValues.message}
+						onChange={(e) => setFormValues({ ...formValues, message: e.target.value })}
 					/>
-					<SubmitButton whileHover={{ backgroundColor: '#1d3557', borderColor: '#1d3557', color: 'white' }}>
+					<SubmitButton
+						whileHover={{ backgroundColor: '#1d3557', borderColor: '#1d3557', color: 'white' }}
+						onClick={handleSubmit}
+					>
 						Submit
 					</SubmitButton>
 				</FormContainer>
