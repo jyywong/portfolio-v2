@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import { motion, useAnimation } from 'framer-motion';
 import { useMediaQuery } from '@react-hook/media-query';
 import styled from 'styled-components';
-import Layout from '../components/Layout';
+import DetailsLayout from '../components/DetailsLayout';
 import { generateMedia } from 'styled-media-query';
 import LiveButton from '../components/blocks/LiveButton';
 import GithubButton from '../components/blocks/GithubButton';
@@ -59,6 +59,7 @@ const Home = styled.span`
 	color: #a8dadc;
 	top: 1.5rem;
 	left: 1.5rem;
+	z-index: 2000;
 `;
 const DescriptionDiv = styled.div`
 	/* background-color: white; */
@@ -482,7 +483,7 @@ const Project1Details = () => {
 		allAnimateSeq();
 	}, []);
 	return (
-		<Layout>
+		<DetailsLayout>
 			<Background>
 				<Link to="/">
 					<Home>
@@ -491,14 +492,12 @@ const Project1Details = () => {
 				</Link>
 				<SeperatorDiv>
 					<DescriptionDiv>
-						<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
-							Inventory Manager
-						</ProjectTitle>
-						<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
+						<ProjectTitle>Inventory Manager</ProjectTitle>
+						<ProjectDescription>
 							A web app to help laboratories keep track of their inventory.<br />
 							Built using React, Redux, Chakra UI.
 						</ProjectDescription>
-						<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
+						<ButtonDiv>
 							<LiveButton />
 							<GithubButton href={'https://github.com/jyywong/trip-planner'} />
 						</ButtonDiv>
@@ -588,7 +587,7 @@ const Project1Details = () => {
 					</React.Fragment>
 				)}
 			</Background>;
-		</Layout>
+		</DetailsLayout>
 	);
 };
 

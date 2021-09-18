@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { AnimatePresence } from 'framer-motion';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styled from 'styled-components';
 import Hero from '../components/Hero';
 import '@fontsource/roboto';
+import Loader from '../components/Loader';
 import MainLayout from '../components/MainLayout';
 import Skills from '../components/Skills';
 import Project1 from '../components/Project1';
@@ -43,6 +45,7 @@ const ScrollContainer = styled.div`
 
 const IndexPage = () => {
 	const previousScroll = useRef(0);
+	const [ displayLoader, setDisplayLoader ] = useState(true);
 	const [ navInteract, setNavInteract ] = useState(false);
 	const [ navStatus, setNavStatus ] = useState('disappear');
 	const heroRef = useRef();
@@ -89,6 +92,10 @@ const IndexPage = () => {
 	};
 
 	useEffect(() => {
+		setTimeout(() => {
+			setDisplayLoader(false);
+		}, 1000);
+
 		ScrollTrigger.create({
 			trigger: '.Skills',
 			start: 'top center',
@@ -135,6 +142,8 @@ const IndexPage = () => {
 	return (
 		<React.Fragment>
 			<MainLayout>
+				<AnimatePresence>{displayLoader && <Loader />}</AnimatePresence>
+
 				<ScrollContainer className="scrollContainer" onScroll={handleScroll}>
 					<Navbar
 						navInteract={navInteract}

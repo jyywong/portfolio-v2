@@ -1,10 +1,11 @@
 import React, { useState, useEffect, forwardRef } from 'react';
 import * as THREE from 'three';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import NET from 'vanta/dist/vanta.net.min';
 import styled from 'styled-components';
 import media, { generateMedia } from 'styled-media-query';
 import Layout from './Layout';
+import Modal from './Modal';
 const customMedia = generateMedia({
 	small: '500px'
 });
@@ -36,12 +37,30 @@ const HeroText = styled.h1`
 	`};
 `;
 
+const ButtonContainer = styled(motion.div)`
+	display: flex;
+`;
+
 const Button = styled(motion.button)`
+	margin: 1rem;
 	margin-top: 2rem;
 	padding: 1rem;
-	border: 2px solid white;
-	background-color: transparent;
-	color: white;
+	/* border-radius: 5px; */
+	border:none;
+	background-color:#a8dadc ;
+	color: #1d3557;
+	font-size: 2rem;
+	cursor: pointer;
+`;
+
+const AltButton = styled(motion.button)`
+	margin: 1rem;
+	margin-top: 2rem;
+	padding: 1rem;
+	/* border-radius: 5px; */
+	border:1px solid #a8dadc;
+	background-color:transparent ;
+	color: #a8dadc;
 	font-size: 2rem;
 	cursor: pointer;
 `;
@@ -49,6 +68,7 @@ const Button = styled(motion.button)`
 const NameSpan = styled.span`color: #e63946;`;
 
 const Hero = forwardRef(({ handleViewWork }, ref) => {
+	const [ showModal, setShowModal ] = useState(false);
 	const [ vantaEffect, setVantaEffect ] = useState(0);
 	useEffect(
 		() => {
@@ -71,19 +91,31 @@ const Hero = forwardRef(({ handleViewWork }, ref) => {
 	return (
 		<Layout>
 			<Background ref={ref}>
+				<AnimatePresence>{showModal && <Modal setShowModal={setShowModal} />}</AnimatePresence>
 				<HeroText>
 					Hello, I'm <NameSpan>Jonathan Wong</NameSpan> <br /> a front-end developer
 				</HeroText>
-				<Button
-					whileHover={{
-						backgroundColor: '#457b9d',
-						borderColor: '#457b9d'
-					}}
-					onClick={handleViewWork}
-					onTouchEnd={handleViewWork}
-				>
-					View my work
-				</Button>
+				<ButtonContainer>
+					<Button
+						whileHover={{
+							scale: 1.05
+						}}
+						onClick={handleViewWork}
+						onTouchEnd={handleViewWork}
+					>
+						View my work
+					</Button>
+					<AltButton
+						whileHover={{
+							scale: 1.05
+						}}
+						onClick={() => {
+							setShowModal(true);
+						}}
+					>
+						Alt Experience
+					</AltButton>
+				</ButtonContainer>
 			</Background>
 		</Layout>
 	);

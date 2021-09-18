@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useMediaQuery } from '@react-hook/media-query';
 import styled from 'styled-components';
-import Layout from '../components/Layout';
+import DetailsLayout from '../components/DetailsLayout';
 import { generateMedia } from 'styled-media-query';
 import LiveButton from '../components/blocks/LiveButton';
 import GithubButton from '../components/blocks/GithubButton';
@@ -59,6 +59,7 @@ const Home = styled.span`
 	color: #a8dadc;
 	top: 1.5rem;
 	left: 1.5rem;
+	z-index: 2000;
 `;
 const DescriptionDiv = styled.div`
 	/* background-color: white; */
@@ -466,10 +467,10 @@ const Project1Details = () => {
 			transition: { type: 'spring', mass: 1, damping: 14, delay: 0.5 }
 		});
 	};
+
 	const allAnimateSeq = async () => {
 		await controlTitle.start({
-			x: [ 700, 700, 0 ],
-			scale: [ 1.5, 1.5, 1 ],
+			scale: [ 1.1, 1.1, 1 ],
 			opacity: [ 0, 1, 1 ],
 			transition: { duration: 2, times: [ 0, 0.65, 1 ] }
 		});
@@ -483,7 +484,7 @@ const Project1Details = () => {
 		allAnimateSeq();
 	}, []);
 	return (
-		<Layout>
+		<DetailsLayout>
 			<Background>
 				<Link to="/">
 					<Home>
@@ -493,14 +494,12 @@ const Project1Details = () => {
 
 				<SeperatorDiv>
 					<DescriptionDiv>
-						<ProjectTitle animate={controlTitle} initial={{ opacity: 0 }}>
-							Trip Planner
-						</ProjectTitle>
-						<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
+						<ProjectTitle>Trip Planner</ProjectTitle>
+						<ProjectDescription>
 							A web app to help groups plan trips collaboratively.<br /> Built using React, Redux,
 							RTK-Query, Material-UI, Framer-Motion, and Google Maps API. <br />
 						</ProjectDescription>
-						<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
+						<ButtonDiv>
 							<LiveButton />
 							<GithubButton href={'https://github.com/jyywong/trip-planner'} />
 						</ButtonDiv>
@@ -590,7 +589,7 @@ const Project1Details = () => {
 					</React.Fragment>
 				)}
 			</Background>;
-		</Layout>
+		</DetailsLayout>
 	);
 };
 
