@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby';
 import { motion, useAnimation } from 'framer-motion';
 import { useMediaQuery } from '@react-hook/media-query';
@@ -484,6 +485,10 @@ const Project1Details = () => {
 	}, []);
 	return (
 		<DetailsLayout>
+			<Helmet>
+				<meta charSet="utf-8" />
+				<title>Jonathan Wong - Inventory Manager</title>
+			</Helmet>
 			<Background>
 				<Link to="/">
 					<Home>

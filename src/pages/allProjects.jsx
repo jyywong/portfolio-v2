@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { generateMedia } from 'styled-media-query';
 import Layout from '../components/Layout';
@@ -87,6 +88,10 @@ const AllProjects = () => {
 	};
 	return (
 		<Layout>
+			<Helmet>
+				<meta charSet="utf-8" />
+				<title>Jonathan Wong - All Projects</title>
+			</Helmet>
 			<Background>
 				<SimpleNavbar />
 				<PageHeader>All Projects</PageHeader>

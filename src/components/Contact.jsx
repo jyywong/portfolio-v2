@@ -146,14 +146,14 @@ const Contact = forwardRef(({ handleBackToTop }, ref) => {
 
 	const handleSubmit = async () => {
 		const { name, email, message } = formValues;
-		// try {
-		// 	const response = await createContact(name, email, message);
-		// 	setIsSuccessful(true);
-		// 	setShowModal(true);
-		// } catch (error) {
-		// 	setIsSuccessful(false);
-		// 	setShowModal(true);
-		// }
+		try {
+			const response = await createContact(name, email, message);
+			setIsSuccessful(true);
+			setShowModal(true);
+		} catch (error) {
+			setIsSuccessful(false);
+			setShowModal(true);
+		}
 		setShowModal(true);
 		setFormValues({ name: '', email: '', message: '' });
 	};

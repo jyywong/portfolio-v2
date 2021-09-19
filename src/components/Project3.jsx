@@ -386,7 +386,6 @@ const Project3 = forwardRef(({ project3Animate }, ref) => {
 		() => {
 			if (project3Animate) {
 				allAnimateSeq();
-				console.log('ofcourse');
 			}
 		},
 		[ project3Animate ]

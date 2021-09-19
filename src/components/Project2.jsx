@@ -336,8 +336,6 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 		setConstraints(boxRef.current.getBoundingClientRect());
 	};
 	const handleClick = (event) => {
-		console.log('click');
-		console.log(event);
 		const randomWidth = Math.floor(Math.random() * (120 - 75 + 1) + 75);
 		const randomHeight = Math.floor(Math.random() * (120 - 75 + 1) + 75);
 		if (!touchScreen) {
@@ -347,7 +345,6 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 		} else {
 			World.add(scene.engine.world, Bodies.rectangle(canvasRef.current.width / 2, 0, randomWidth, randomHeight));
 		}
-		console.log(canvasRef.current.width);
 	};
 
 	const controlTitle = useAnimation();

@@ -30,6 +30,15 @@ module.exports = {
 			options: {
 				lang: 'en'
 			}
+		},
+		{
+			resolve: `gatsby-plugin-manifest`,
+			options: {
+				name: 'Portfolio',
+				short_name: 'Portfolio',
+				start_url: '/',
+				icon: 'src/assets/favicon.svg'
+			}
 		}
 	]
 };

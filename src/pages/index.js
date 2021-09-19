@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet';
 import { gsap } from 'gsap';
 import { AnimatePresence } from 'framer-motion';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -81,7 +82,7 @@ const IndexPage = () => {
 				if (!navInteract) {
 					setTimeout(() => {
 						setNavStatus('disappear');
-					}, 1500);
+					}, 3000);
 				}
 			} else if (currentScroll < previousScroll.current) {
 				setNavStatus('visible');
@@ -141,6 +142,10 @@ const IndexPage = () => {
 
 	return (
 		<React.Fragment>
+			<Helmet>
+				<meta charSet="utf-8" />
+				<title>Jonathan Wong</title>
+			</Helmet>
 			<MainLayout>
 				<AnimatePresence>{displayLoader && <Loader />}</AnimatePresence>
 

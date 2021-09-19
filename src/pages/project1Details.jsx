@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { motion, useAnimation } from 'framer-motion';
 import { useMediaQuery } from '@react-hook/media-query';
 import styled from 'styled-components';
@@ -485,6 +486,10 @@ const Project1Details = () => {
 	}, []);
 	return (
 		<DetailsLayout>
+			<Helmet>
+				<meta charSet="utf-8" />
+				<title>Jonathan Wong - Trip Planner</title>
+			</Helmet>
 			<Background>
 				<Link to="/">
 					<Home>
