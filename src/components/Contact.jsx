@@ -1,11 +1,12 @@
 import React, { useState, forwardRef } from 'react';
 import Layout from './Layout';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { generateMedia } from 'styled-media-query';
 import { HiChevronDoubleUp } from 'react-icons/hi';
 import Triangle from '../assets/triangle.svg';
 import { createContact } from '../services/services';
+import ContactModal from './ContactModal';
 
 const customMedia = generateMedia({
 	sTablet: '580px',
@@ -139,16 +140,30 @@ const ReturnTop = styled(motion.button)`
 	`};
 `;
 const Contact = forwardRef(({ handleBackToTop }, ref) => {
+	const [ isSuccesful, setIsSuccessful ] = useState(true);
+	const [ showModal, setShowModal ] = useState(false);
 	const [ formValues, setFormValues ] = useState({ name: '', email: '', message: '' });
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		const { name, email, message } = formValues;
-		createContact(name, email, message).catch((error) => console.log(error.response));
+		// try {
+		// 	const response = await createContact(name, email, message);
+		// 	setIsSuccessful(true);
+		// 	setShowModal(true);
+		// } catch (error) {
+		// 	setIsSuccessful(false);
+		// 	setShowModal(true);
+		// }
+		setShowModal(true);
 		setFormValues({ name: '', email: '', message: '' });
 	};
 	return (
 		<Layout>
 			<Background ref={ref}>
+				<AnimatePresence>
+					{showModal && <ContactModal setShowModal={setShowModal} isSuccessful={isSuccesful} />}
+				</AnimatePresence>
+
 				<StyledTriangle />
 				<FormContainer>
 					<SectionHeader>Contact</SectionHeader>
@@ -158,7 +173,7 @@ const Contact = forwardRef(({ handleBackToTop }, ref) => {
 							scale: 1.03,
 							boxShadow: ' 0 0 0 4px rgb(69, 123, 157, 0.4)'
 						}}
-						placeholder="Name"
+						placeholder="Subject"
 						value={formValues.name}
 						onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
 					/>
@@ -182,7 +197,7 @@ const Contact = forwardRef(({ handleBackToTop }, ref) => {
 						onChange={(e) => setFormValues({ ...formValues, message: e.target.value })}
 					/>
 					<SubmitButton
-						whileHover={{ backgroundColor: '#1d3557', borderColor: '#1d3557', color: 'white' }}
+						whileHover={{ backgroundColor: '#1d3557', borderColor: '#1d3557', color: '#ffffff' }}
 						onClick={handleSubmit}
 					>
 						Submit
