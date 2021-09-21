@@ -5,7 +5,7 @@ This is my portfolio website, designed to display my projects and other skills.
 
 ## Preview
 
-![me](https://github.com/jyywong/ims_frontend/blob/main/public/GithubGifs/IMS_Explore.gif)
+![me](https://github.com/jyywong/portfolio-v2/blob/master/src/GithubGifs/portfolioPreview.gif)
 
 
 ## What did I learn
