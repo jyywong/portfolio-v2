@@ -39,24 +39,24 @@ export const projectList = [
 		name: 'Textbook Auction',
 		description: 'The front end to a web app designed to make selling used textbooks easier',
 		tags: [ 'React', 'Bootstrap', 'Javascript' ],
-		href: 'https://github.com/jyywong/ims_frontend'
+		href: 'https://github.com/jyywong/Auction-House-FrontEnd'
 	},
 	{
 		name: 'Textbook Auction API',
 		description: 'The back end to the Textbook Auction project',
 		tags: [ 'Django', 'Django-Rest-Framework', 'Python' ],
-		href: 'https://github.com/jyywong/MoonMS-Backend'
+		href: 'https://github.com/jyywong/AuctionHouse'
 	},
 	{
 		name: 'Reddit Clone',
 		description: 'A reddit clone to learn php and laravel.',
 		tags: [ 'Laravel', 'Bootstrap', 'PHP' ],
 		href: 'https://github.com/jyywong/Laravel-Blog'
-	},
-	{
-		name: 'Auction House (Built in Django)',
-		description: 'Prototype of Textbook Auction built entirely in Django',
-		tags: [ 'Django', 'Python' ],
-		href: 'https://github.com/jyywong/Laravel-Blog'
 	}
+	// {
+	// 	name: 'Auction House (Built in Django)',
+	// 	description: 'Prototype of Textbook Auction built entirely in Django',
+	// 	tags: [ 'Django', 'Python' ],
+	// 	href: 'https://github.com/jyywong/AuctionHouse'
+	// }
 ];
