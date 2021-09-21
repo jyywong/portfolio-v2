@@ -11,7 +11,7 @@ const customMedia = generateMedia({
 	lPhone: '430px'
 });
 
-const ProjectDiv = styled(motion.div)`
+const ProjectDiv = styled(motion.a)`
 	background-color: #457b9d;
 	cursor: pointer;
 	height: 250px;
@@ -21,6 +21,7 @@ const ProjectDiv = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	box-shadow: 0 0 12px rgba(0, 0, 0, 0.53);
+	text-decoration: none;
 `;
 const ProjectHeader = styled(motion.div)`
 	font-size: 3rem;
@@ -45,7 +46,7 @@ const TagContainer = styled(motion.div)`
 	margin-top: auto;
 	display: flex;
 `;
-const ProjectBlock = ({ name, description, tags }) => {
+const ProjectBlock = ({ name, description, tags, href }) => {
 	return (
 		<ProjectDiv
 			layout
@@ -54,6 +55,8 @@ const ProjectBlock = ({ name, description, tags }) => {
 				y: -2
 			}}
 			exit={{ scale: 0, opacity: 0 }}
+			href={href}
+			target="_blank"
 		>
 			<ProjectHeader layout>
 				<MdFolderOpen />

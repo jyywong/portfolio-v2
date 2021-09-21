@@ -108,8 +108,8 @@ const AllProjects = () => {
 				/>
 				<ProjectsContainer layout>
 					<AnimatePresence>
-						{filterProjects(projectList).map(({ name, description, tags }, index) => (
-							<ProjectBlock key={index} name={name} description={description} tags={tags} />
+						{filterProjects(projectList).map(({ name, description, tags, href }, index) => (
+							<ProjectBlock key={index} name={name} description={description} tags={tags} href={href} />
 						))}
 					</AnimatePresence>
 				</ProjectsContainer>
