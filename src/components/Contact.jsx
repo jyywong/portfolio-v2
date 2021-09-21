@@ -1,5 +1,4 @@
 import React, { useState, forwardRef } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
 import Layout from './Layout';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,6 +7,7 @@ import { HiChevronDoubleUp } from 'react-icons/hi';
 import Triangle from '../assets/triangle.svg';
 import { createContact } from '../services/services';
 import ContactModal from './ContactModal';
+import CaptchaModal from './CaptchaModal';
 
 const customMedia = generateMedia({
 	sTablet: '580px',
@@ -125,12 +125,6 @@ const SubmitButton = styled(motion.button)`
 		padding:.75rem;
 	`};
 `;
-const CaptchaDiv = styled.div`
-	margin-top: 2rem;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-`;
 
 const ReturnTop = styled(motion.button)`
 	position: absolute;
@@ -148,11 +142,16 @@ const ReturnTop = styled(motion.button)`
 `;
 const Contact = forwardRef(({ handleBackToTop }, ref) => {
 	const [ isSuccesful, setIsSuccessful ] = useState(true);
+	const [ showCaptcha, setShowCaptcha ] = useState(false);
 	const [ showModal, setShowModal ] = useState(false);
 	const [ formValues, setFormValues ] = useState({ name: '', email: '', message: '', key: '' });
 
 	const handleCaptcha = (key) => {
 		setFormValues({ ...formValues, key });
+		handleSubmit();
+	};
+	const handleFormSubmit = () => {
+		setShowCaptcha(true);
 	};
 
 	const handleSubmit = async () => {
@@ -173,8 +172,15 @@ const Contact = forwardRef(({ handleBackToTop }, ref) => {
 		<Layout>
 			<Background ref={ref}>
 				<AnimatePresence>
-					{showModal && <ContactModal setShowModal={setShowModal} isSuccessful={isSuccesful} />}
+					{showModal && (
+						<ContactModal
+							setShowModal={setShowModal}
+							setShowCaptcha={setShowCaptcha}
+							isSuccessful={isSuccesful}
+						/>
+					)}
 				</AnimatePresence>
+				{showCaptcha && <CaptchaModal handleCaptcha={handleCaptcha} />}
 				<StyledTriangle />
 				<FormContainer>
 					<SectionHeader>Contact</SectionHeader>
@@ -207,12 +213,9 @@ const Contact = forwardRef(({ handleBackToTop }, ref) => {
 						value={formValues.message}
 						onChange={(e) => setFormValues({ ...formValues, message: e.target.value })}
 					/>
-					<CaptchaDiv>
-						<ReCAPTCHA onChange={handleCaptcha} sitekey="6LfR2XocAAAAAFMSPRZk1DxnZtev0W-RAISLj9yK" />
-					</CaptchaDiv>
 					<SubmitButton
 						whileHover={{ backgroundColor: '#1d3557', borderColor: '#1d3557', color: '#ffffff' }}
-						onClick={handleSubmit}
+						onClick={handleFormSubmit}
 					>
 						Submit
 					</SubmitButton>

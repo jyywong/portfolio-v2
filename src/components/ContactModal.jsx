@@ -23,7 +23,7 @@ const ModalContainer = styled(motion.div)`
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
-	z-index: 10000;
+	z-index: 20000;
 	background-color: rgba(0, 0, 0, 0.5);
 
 	display: flex;
@@ -83,6 +83,7 @@ const ParagraphContainer = styled.div`
 `;
 const ModalParagraph = styled.p`
 	text-align: center;
+	margin-top: 2rem;
 	font-size: 2rem;
 	color: #a8dadc;
 	${customMedia.lessThan('xsLaptop')`
@@ -115,20 +116,26 @@ const Button = styled(motion.a)`
 const EmailLink = styled.a`
 	color: white;
 	font-size: 2rem;
+	${customMedia.lessThan('xsLaptop')`
+        font-size: 1.8rem;
+	`};
+	${customMedia.lessThan('sTablet')`
+        font-size: 1.5rem;
+	`};
 `;
-const ContactModal = ({ setShowModal, isSuccessful }) => {
+const ContactModal = ({ setShowModal, setShowCaptcha, isSuccessful }) => {
 	return (
 		<ModalContainer animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }}>
 			<ModalContent animate={{ y: 0 }} initial={{ y: -1000 }} exit={{ y: -1000 }}>
 				{isSuccessful ? (
 					<React.Fragment>
 						<StyledCheck />
-						<ModalHeader>Message sent succesfully!</ModalHeader>}
+						<ModalHeader>Message sent succesfully!</ModalHeader>
 					</React.Fragment>
 				) : (
 					<React.Fragment>
 						<StyledError />
-						<ModalHeader>Message was not sent!</ModalHeader>}
+						<ModalHeader>Message was not sent!</ModalHeader>
 					</React.Fragment>
 				)}
 				<ParagraphContainer>
@@ -156,6 +163,7 @@ const ContactModal = ({ setShowModal, isSuccessful }) => {
 							}}
 							onClick={() => {
 								setShowModal(false);
+								setShowCaptcha(false);
 							}}
 						>
 							Got it
