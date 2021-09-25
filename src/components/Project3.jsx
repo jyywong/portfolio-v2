@@ -428,8 +428,8 @@ const Project3 = forwardRef(({ project3Animate }, ref) => {
 						</StyledLink>
 					</ProjectDescription>
 					<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
-						<LiveButton />
-						<GithubButton href={'https://github.com/jyywong/Auction-House-FrontEnd'} />
+						<LiveButton href={'https://blissful-poincare-9e51ea.netlify.app/'} target="_blank" />
+						<GithubButton href={'https://github.com/jyywong/Auction-House-FrontEnd'} target="_blank" />
 					</ButtonDiv>
 				</DescriptionDiv>
 				<BackPolygonShadowWrap>

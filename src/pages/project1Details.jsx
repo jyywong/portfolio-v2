@@ -563,8 +563,8 @@ const Project1Details = () => {
 									scale: 1.05,
 									transition: { type: 'spring', mass: 1 }
 								}}
-								animate={controlBackPoly}
-								initial={{ x: 1100 }}
+								// animate={controlBackPoly}
+								// initial={{ x: 1100 }}
 							/>
 						</BackPolygonShadowWrap>
 						<MidPolygonShadowWrap>
@@ -573,8 +573,8 @@ const Project1Details = () => {
 									scale: 1.05,
 									transition: { type: 'spring', mass: 1 }
 								}}
-								animate={controlMidPoly}
-								initial={{ x: 1100 }}
+								// animate={controlMidPoly}
+								// initial={{ x: 1100 }}
 							/>
 						</MidPolygonShadowWrap>
 						<ForePolygonShadowWrap>
@@ -583,8 +583,8 @@ const Project1Details = () => {
 									scale: 1.05,
 									transition: { type: 'spring', mass: 1 }
 								}}
-								animate={controlForePoly}
-								initial={{ x: 1100 }}
+								// animate={controlForePoly}
+								// initial={{ x: 1100 }}
 							>
 								<ImageContainer>
 									<StaticImage src="../images/TripPlannerLaptop.png" alt="website" />

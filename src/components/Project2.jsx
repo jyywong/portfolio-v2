@@ -531,7 +531,7 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 						</StyledLink>
 					</ProjectDescription>
 					<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
-						<LiveButton href={'https://github.com/jyywong/ims_frontend'} />
+						<LiveButton href={'https://quirky-mahavira-f43b02.netlify.app/'} target="_blank" />
 						<GitButton
 							whileHover={{
 								scale: 1.05,

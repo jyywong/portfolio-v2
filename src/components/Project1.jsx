@@ -411,7 +411,7 @@ const Project1 = forwardRef(({ project1Animate }, ref) => {
 						</StyledLink>
 					</ProjectDescription>
 					<ButtonDiv animate={controlDescription} initial={{ opacity: 0 }}>
-						<LiveButton />
+						<LiveButton href={'https://peaceful-meitner-60541b.netlify.app/'} />
 						<GithubButton href={'https://github.com/jyywong/trip-planner'} />
 					</ButtonDiv>
 				</DescriptionDiv>
