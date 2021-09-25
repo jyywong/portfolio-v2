@@ -4,7 +4,6 @@ import { StaticImage } from 'gatsby-plugin-image';
 import { generateMedia } from 'styled-media-query';
 import { Link } from 'gatsby';
 import MaskTrail from '../assets/maskTrail.svg';
-
 import { BiChevronRight } from 'react-icons/bi';
 import Layout from './Layout';
 import styled, { keyframes } from 'styled-components';

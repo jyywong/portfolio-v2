@@ -6,7 +6,6 @@ import { generateMedia } from 'styled-media-query';
 import { FaGithub } from 'react-icons/fa';
 import Matter, { World, Bodies, MouseConstraint } from 'matter-js';
 import { Link } from 'gatsby';
-
 import { BiChevronRight } from 'react-icons/bi';
 import Layout from './Layout';
 import styled from 'styled-components';
@@ -183,8 +182,8 @@ const GitButton = styled(motion.a)`
 `;
 
 const ButtonText = styled.h6`
-	font-size: 2.5rem;
-	font-weight: 700;
+	font-size: 2.2rem;
+	font-weight: 500;
 	margin-right: 1rem;
 	${customMedia.lessThan('lPhone')`
 		font-size:2rem;

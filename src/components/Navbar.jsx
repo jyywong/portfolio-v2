@@ -23,10 +23,11 @@ const NavBar = styled(motion.div)`
 	top: 0;
 	height:7vh;
 	width: 100%;
-	background-color: rgba(29, 53, 87, 1);
+	background-color: ${(props) => (props.isClicked ? 'rgba(29, 53, 87, 1)' : 'rgba(29, 53, 87, 0.7)')};
 	box-shadow: ${(props) => (props.isClicked ? '' : ' 0 3px 3px rgba(0, 0, 0, 0.25)')};
 	position: sticky;
 	z-index: 1000;
+
 	
 
 `;

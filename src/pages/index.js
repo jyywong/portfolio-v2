@@ -24,7 +24,7 @@ ScrollTrigger.defaults({
 
 const ScrollContainer = styled.div`
 	position: relative;
-	scroll-snap-type: y proximity;
+	/* scroll-snap-type: y proximity; */
 	height: 100vh;
 	width: 100vw;
 	overflow-y: scroll;
@@ -48,7 +48,7 @@ const IndexPage = () => {
 	const previousScroll = useRef(0);
 	const [ displayLoader, setDisplayLoader ] = useState(true);
 	const [ navInteract, setNavInteract ] = useState(false);
-	const [ navStatus, setNavStatus ] = useState('disappear');
+	const [ navStatus, setNavStatus ] = useState('visible');
 	const heroRef = useRef();
 	const skillsRef = useRef();
 	const project1Ref = useRef();
@@ -149,7 +149,7 @@ const IndexPage = () => {
 			<MainLayout>
 				<AnimatePresence>{displayLoader && <Loader />}</AnimatePresence>
 
-				<ScrollContainer className="scrollContainer" onScroll={handleScroll}>
+				<ScrollContainer className="scrollContainer">
 					<Navbar
 						navInteract={navInteract}
 						setNavInteract={setNavInteract}
