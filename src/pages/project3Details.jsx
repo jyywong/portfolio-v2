@@ -66,23 +66,22 @@ const Home = styled.span`
 `;
 const DescriptionDiv = styled.div`
 	/* background-color: white; */
-	/* flex-basis: 40%; */
-	width: 45%;
+	height: 50vh;
+	width: 100%;
 	margin-top: 4rem;
 	display: flex;
-	flex-direction: column;
+	align-items: center;
 	justify-content: center;
 	text-align: left;
-	padding-left: 8rem;
+	padding: 8rem;
 	z-index: 10;
 	${customMedia.lessThan('sLaptop')`
-		margin-top: 0;
+		
 		width:100%;
 		padding:4rem;
 	`};
 	${customMedia.lessThan('sTablet')`
 		flex-basis:25%
-		padding:0;
 	`};
 `;
 
@@ -260,18 +259,18 @@ const TechItem = styled.p`
 	`};
 `;
 const ImageContainer = styled.div`
-	width: 65%;
-	height: 65%;
+	/* background-color: red; */
+	width: 95%;
+	height: 95%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	${customMedia.lessThan('mLaptop')`
+	/* ${customMedia.lessThan('mLaptop')`
 
 		width: 80%;
 		height: 80%;
-	`};
+	`}; */
 	${customMedia.lessThan('sLaptop')`
-
 		width: 75%;
 		height: 75%;
 	`};
@@ -301,152 +300,23 @@ const PolygonContainer = styled.div`
 	`};
 `;
 
-const ForePolygonShadowWrap = styled.span`
-	position: absolute;
-	/* top: -5rem; */
-	right: -5rem;
-	top: calc(22.5vh - 19.5vh);
-	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
-	z-index: 100;
-	${customMedia.lessThan('sLaptop')`
-		right: 15vw;
-		top: auto;
-	`};
-	${customMedia.lessThan('tablet')`
-		right:5vw
-
-	`};
+const ImageContainerContainer = styled.div`
+	flex-basis: 50%;
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
-const ForePolygon = styled(motion.div)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-	background-color: rgba(196, 196, 196, 1);
-	width: 50vw;
-	height:calc(55vh - 15vh);
-	clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
-	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
-	/* ${customMedia.lessThan('mLaptop')`
-		width:60vw;
-	`}; */
+const MainContainer = styled.div`
+	display: flex;
+	flex-basis: 50%;
+	flex-direction: column;
+	justify-content: flex-start;
 	${customMedia.lessThan('sLaptop')`
-		clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
-		width:70vw;
-		height: 42vh;
-	`};
-	${customMedia.lessThan('tablet')`
-		width:90vw
-
-	`};
-	${customMedia.lessThan('sTablet')`
-		height: 35vh;
-	`};
-	${customMedia.lessThan('lPhone')`
-		height: 30vh
-	`};
-`;
-
-const MidPolygonShadowWrap = styled.span`
-	position: absolute;
-	/* top: 0rem; */
-	right: -5rem;
-	top: calc(27.5vh - 22vh);
-	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
-	z-index: 100;
-	${customMedia.lessThan('sLaptop')`
-		left: 15vw;
-		top: 6vh;
-	`};
-	${customMedia.lessThan('tablet')`
-		left: 5vw;
-		top: 6vh;
-	`};
-`;
-
-const MidPolygon = styled(motion.div)`
-	background-color: rgba(196, 196, 196, 1);
-	/* height: 30rem; */
-    height:calc(30vh - 7vh);
-	/* width: 105rem; */
-    width:54.5vw;
-	clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
-	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
-	/* ${customMedia.lessThan('mLaptop')`
-		width:61.5vw;
-	`}; */
-	${customMedia.lessThan('sLaptop')`
-		clip-path: polygon(9.5% 0, 100% 0, 100% 100%, 0 100%);
 		
-	`};
-	${customMedia.lessThan('tablet')`
-		clip-path: polygon(13% 0, 100% 0, 100% 100%, 0 100%);
-	`};
-	${customMedia.lessThan('sTablet')`
-		clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
-		height: 15vh;
-	`};
-	/* ${customMedia.lessThan('mPhone')`
-		height: 42vh;
-	`}; */
-`;
-
-const BackPolygonShadowWrap = styled(motion.span)`
-	position: absolute;
-	/* top: 18rem; */
-	right: -5rem;
-    top: calc(45.5vh - 22vh);
-	filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.83));
-	z-index:100;
-	/* ${customMedia.lessThan('sLaptop')`
-	right: auto;
-	top: auto;
-	left:24vw;
-	bottom:0;
-	`}; */
-	${customMedia.lessThan('sLaptop')`
-		right: 15vw;
-		bottom: 6vh;
-	`};
-	${customMedia.lessThan('tablet')`
-		right: 8vw;
-	`};
-	${customMedia.lessThan('sTablet')`
-		top:15vh;
-		right: 7vw;
-	`};
-	${customMedia.lessThan('lPhone')`
-		top:12vh;
-	`};
-`;
-
-const BackPolygon = styled(motion.div)`
-	background-color: rgba(196, 196, 196, 1);
-	/* height: 20rem; */
-    height: calc(21vh - 4vh);
-    /* width:111rem; */
-	width: 58vw;
-	clip-path: polygon(5.5% 0, 100% 0, 100% 100%, 0 100%);
-	box-shadow: 0 0 12px rgba(0, 0, 0, 0.83);
-	/* ${customMedia.lessThan('mLaptop')`
-		width:64.5vw;
-	`}; */
-	${customMedia.lessThan('sLaptop')`
-		clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
-		width:30vw;
-	`};
-	${customMedia.lessThan('sLaptop')`
-		left: 22.5vh;
-		top: 6vh;
-	`};
-	${customMedia.lessThan('tablet')`
-		width:30vw;
-	`};
-	${customMedia.lessThan('sTablet')`
-		clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
-	`};
-	${customMedia.lessThan('lPhone')`
-		clip-path: polygon(0 0, 100% 0, 76% 100%, 0 100%);
+		flex-basis: 100%;
+		padding:4rem;
 	`};
 `;
 
@@ -503,14 +373,26 @@ const Project1Details = () => {
 				</Link>
 				<SeperatorDiv>
 					<DescriptionDiv>
-						<ProjectTitle>Textbook Auction</ProjectTitle>
-						<ProjectDescription>
-							A web app to help students sell and buy used textbooks. Built using React, and Bootstrap.
-						</ProjectDescription>
-						<ButtonDiv>
-							<LiveButton />
-							<GithubButton href={'https://github.com/jyywong/trip-planner'} />
-						</ButtonDiv>
+						<MainContainer>
+							<ProjectTitle>Textbook Auction</ProjectTitle>
+							<ProjectDescription>
+								A web app to help students sell and buy used textbooks. Built using React, and
+								Bootstrap.
+							</ProjectDescription>
+							<ButtonDiv>
+								<LiveButton />
+								<GithubButton href={'https://github.com/jyywong/trip-planner'} />
+							</ButtonDiv>
+						</MainContainer>
+
+						{hasMounted &&
+						!laptopMatch && (
+							<ImageContainerContainer>
+								<ImageContainer>
+									<StaticImage src="../images/TripPlannerLaptop.png" alt="website" />
+								</ImageContainer>
+							</ImageContainerContainer>
+						)}
 					</DescriptionDiv>
 					{hasMounted &&
 					laptopMatch && (
@@ -537,7 +419,7 @@ const Project1Details = () => {
 									<SubDescription>
 										This was my first project using React. Building this project helped me learn the
 										basics of React, such as state, controlled components, useEffect, and using JSX.
-										I also learned how to use Fetch to consume data from the API I build in Django.
+										I also learned how to use Fetch to consume data from the API I built in Django.
 										Finally, I also learned how to implement JWT authentication on both the front
 										end and back end.
 									</SubDescription>
@@ -554,46 +436,6 @@ const Project1Details = () => {
 						</TechContainer>
 					</Technologies>
 				</SeperatorDiv>
-
-				{hasMounted &&
-				!laptopMatch && (
-					<React.Fragment>
-						<BackPolygonShadowWrap>
-							<BackPolygon
-								whileHover={{
-									scale: 1.05,
-									transition: { type: 'spring', mass: 1 }
-								}}
-								// animate={controlBackPoly}
-								// initial={{ x: 1100 }}
-							/>
-						</BackPolygonShadowWrap>
-						<MidPolygonShadowWrap>
-							<MidPolygon
-								whileHover={{
-									scale: 1.05,
-									transition: { type: 'spring', mass: 1 }
-								}}
-								// animate={controlMidPoly}
-								// initial={{ x: 1100 }}
-							/>
-						</MidPolygonShadowWrap>
-						<ForePolygonShadowWrap>
-							<ForePolygon
-								whileHover={{
-									scale: 1.05,
-									transition: { type: 'spring', mass: 1 }
-								}}
-								// animate={controlForePoly}
-								// initial={{ x: 1100 }}
-							>
-								<ImageContainer>
-									<StaticImage src="../images/TripPlannerLaptop.png" alt="website" />
-								</ImageContainer>
-							</ForePolygon>
-						</ForePolygonShadowWrap>
-					</React.Fragment>
-				)}
 			</Background>;
 		</DetailsLayout>
 	);
