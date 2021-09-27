@@ -12,6 +12,7 @@ import { BiChevronLeft } from 'react-icons/bi';
 import { Link } from 'gatsby';
 
 const customMedia = generateMedia({
+	half4k: '2100px',
 	lLaptop: '1370px',
 	mLaptop: '1210px',
 	sLaptop: '1024px',
@@ -74,7 +75,6 @@ const DescriptionDiv = styled.div`
 	padding: 8rem;
 	z-index: 10;
 	${customMedia.lessThan('sLaptop')`
-		
 		width:100%;
 		padding:4rem;
 	`};
@@ -84,9 +84,12 @@ const DescriptionDiv = styled.div`
 `;
 
 const ProjectTitle = styled(motion.h1)`
-	font-size: 9rem;
+	font-size: 10rem;
 	color: white;
 	z-index:10;
+	${customMedia.greaterThan('half4k')`
+		font-size: 15rem
+	`};
 	${customMedia.lessThan('lLaptop')`
 		font-size: 8.5rem;
 		
@@ -110,6 +113,9 @@ const ProjectDescription = styled(motion.h4)`
 	color: #a8dadc;
 	font-weight: 100;
 	hyphens: auto;
+	${customMedia.greaterThan('half4k')`
+		font-size: 3.5rem
+	`};
 	${customMedia.lessThan('sLaptop')`
 		font-size: 2rem;
 	`};
@@ -174,6 +180,9 @@ const FeaturesContainer = styled.div`
 const SubHeading = styled.h4`
 	font-size: 3rem;
 	color: white;
+	${customMedia.greaterThan('half4k')`
+		font-size: 5rem
+	`};
 	${customMedia.lessThan('tablet')`
 		font-size: 2.5rem
 	`};
@@ -188,6 +197,9 @@ const SubDescription = styled.p`
 	font-size: 2rem;
 	color: #f1faee;
 	hyphens: auto;
+	${customMedia.greaterThan('half4k')`
+		font-size: 3rem
+	`};
 	${customMedia.lessThan('tablet')`
 		font-size: 1.8rem
 	`};
@@ -235,8 +247,11 @@ const Technologies = styled.div`
 	`};
 `;
 const TechHeading = styled.h5`
-	font-size: 1.5rem;
+	font-size: 1.75rem;
 	color: white;
+	${customMedia.greaterThan('half4k')`
+		font-size: 2.5rem
+	`};
 `;
 const TechContainer = styled.div`
 	display: flex;
@@ -250,6 +265,9 @@ const TechContainer = styled.div`
 const TechItem = styled.p`
 	font-size: 2rem;
 	color: #a8dadc;
+	${customMedia.greaterThan('half4k')`
+		font-size: 2.75rem
+	`};
 	${customMedia.lessThan('sLaptop')`
 		margin-top: 2rem;
 	`};
