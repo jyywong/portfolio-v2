@@ -70,7 +70,7 @@ const IndexPage = () => {
 		skillsRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 	const handleViewWork = () => {
-		project4Ref.current.scrollIntoView({ behavior: 'smooth' });
+		project1Ref.current.scrollIntoView({ behavior: 'smooth' });
 	};
 	const handleViewContact = () => {
 		contactRef.current.scrollIntoView({ behavior: 'smooth' });
