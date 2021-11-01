@@ -120,7 +120,7 @@ const Modal = ({ setShowModal }) => {
 		<ModalContainer animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }}>
 			<ModalContent animate={{ y: 0 }} initial={{ y: -1000 }} exit={{ y: -1000 }}>
 				<StyledQuestion />
-				<ModalHeader>What is this "Alt Experience"?</ModalHeader>
+				<ModalHeader>What is this "3D Experience"?</ModalHeader>
 				<ParagraphContainer>
 					<ModalParagraph>
 						This is an alternate portfolio experience that I made using Three.JS and Blender. Being a 3D

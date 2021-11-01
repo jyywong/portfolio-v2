@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'gatsby';
 import { motion, useAnimation } from 'framer-motion';
 import { useMediaQuery } from '@react-hook/media-query';
 import styled from 'styled-components';
@@ -9,7 +10,6 @@ import LiveButton from '../components/blocks/LiveButton';
 import GithubButton from '../components/blocks/GithubButton';
 import { StaticImage } from 'gatsby-plugin-image';
 import { BiChevronLeft } from 'react-icons/bi';
-import { Link } from 'gatsby';
 
 const customMedia = generateMedia({
 	half4k: '2100px',
@@ -34,9 +34,9 @@ const Background = styled.div`
 	align-items: flex-start;
 	justify-content: flex-start;
 	${customMedia.lessThan('sLaptop')`
-	justify-content: space-evenly;
-	overflow:auto;
-	height:200vh;
+		justify-content: space-evenly;
+		overflow:auto;
+		height:200vh;
 	`};
 
 	scroll-snap-align: start;
@@ -44,14 +44,16 @@ const Background = styled.div`
 const SeperatorDiv = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	height: 100%;
 	width: 100%;
 	${customMedia.lessThan('sLaptop')`
 	align-items: center
 	`};
+	${customMedia.lessThan('sTablet')`
+		justify-content: space-between;
+	`};
 `;
-
 const Home = styled.span`
 	cursor: pointer;
 	display: flex;
@@ -75,6 +77,7 @@ const DescriptionDiv = styled.div`
 	padding: 8rem;
 	z-index: 10;
 	${customMedia.lessThan('sLaptop')`
+		
 		width:100%;
 		padding:4rem;
 	`};
@@ -88,7 +91,7 @@ const ProjectTitle = styled(motion.h1)`
 	color: white;
 	z-index:10;
 	${customMedia.greaterThan('half4k')`
-		font-size: 15rem
+		font-size: 11.5rem
 	`};
 	${customMedia.lessThan('lLaptop')`
 		font-size: 8.5rem;
@@ -151,16 +154,15 @@ const MiddleDiv = styled.div`
 	flex-basis: 35%;
 	background-color: #457b9d;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-
 	/* ${customMedia.lessThan('sLaptop')`
 		flex-basis:30%;
 	`}; */
 	${customMedia.lessThan('sTablet')`
-		flex-basis: 25%;
+		flex-basis: 27.5%;
 	`};
-	${customMedia.lessThan('lPhone')`
-		flex-basis:35%
-	`};
+	/* ${customMedia.lessThan('lPhone')`
+		flex-basis:2%
+	`}; */
 	${customMedia.lessThan('mPhone')`
 		padding: 2rem;
 		flex-basis:30%
@@ -169,12 +171,13 @@ const MiddleDiv = styled.div`
 
 const FeaturesContainer = styled.div`
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
 	flex-direction: column;
 	height: 50%;
 	width: 75%;
 	${customMedia.lessThan('sTablet')`
 		justify-content:space-evenly;
+		height:auto;
 	`};
 `;
 const SubHeading = styled.h4`
@@ -219,21 +222,23 @@ const CenteringContainer = styled.div`
 	${customMedia.lessThan('sTablet')`
 		height: 100%;
 		flex-direction:column;
-		justify-content:space-evenly;
+		justify-content: space-evenly;
 	`};
 `;
+
 const Features = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-basis: 50%;
+	height: 100%;
 `;
 const Technologies = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
 	flex-direction: column;
-	flex-basis: 15%;
+	flex-basis: 10%;
 	${customMedia.lessThan('sLaptop')`
 		width:100%;
 	`};
@@ -247,7 +252,7 @@ const Technologies = styled.div`
 	`};
 `;
 const TechHeading = styled.h5`
-	font-size: 1.75rem;
+	font-size: 1.5rem;
 	color: white;
 	${customMedia.greaterThan('half4k')`
 		font-size: 2.5rem
@@ -285,7 +290,6 @@ const ImageContainer = styled.div`
 		height: 80%;
 	`}; */
 	${customMedia.lessThan('sLaptop')`
-
 		width: 75%;
 		height: 75%;
 	`};
@@ -314,6 +318,7 @@ const PolygonContainer = styled.div`
 
 	`};
 `;
+
 const ImageContainerContainer = styled.div`
 	flex-basis: 50%;
 	width: 50%;
@@ -334,7 +339,7 @@ const MainContainer = styled.div`
 	`};
 `;
 
-const Project1Details = () => {
+const Project4Details = () => {
 	const [ hasMounted, setHasMounted ] = useState(false);
 	const laptopMatch = useMediaQuery('only screen and (max-width:1024px)');
 	const controlTitle = useAnimation();
@@ -357,10 +362,10 @@ const Project1Details = () => {
 			transition: { type: 'spring', mass: 1, damping: 14, delay: 0.5 }
 		});
 	};
-
 	const allAnimateSeq = async () => {
 		await controlTitle.start({
-			scale: [ 1.1, 1.1, 1 ],
+			x: [ 700, 700, 0 ],
+			scale: [ 1.5, 1.5, 1 ],
 			opacity: [ 0, 1, 1 ],
 			transition: { duration: 2, times: [ 0, 0.65, 1 ] }
 		});
@@ -377,7 +382,7 @@ const Project1Details = () => {
 		<DetailsLayout>
 			<Helmet>
 				<meta charSet="utf-8" />
-				<title>Jonathan Wong - Trip Planner</title>
+				<title>Jonathan Wong - Algorithm Visualizer</title>
 			</Helmet>
 			<Background>
 				<Link to="/">
@@ -385,37 +390,34 @@ const Project1Details = () => {
 						<BiChevronLeft /> Home
 					</Home>
 				</Link>
-
 				<SeperatorDiv>
 					<DescriptionDiv>
 						<MainContainer>
-							<ProjectTitle>Trip Planner</ProjectTitle>
+							<ProjectTitle>Algorithm Visualizer</ProjectTitle>
 							<ProjectDescription>
-								A web app to help groups plan trips collaboratively.<br /> Built using React, Redux,
-								RTK-Query, Material-UI, Framer-Motion, and Google Maps API. <br />
+								A web app to visualize hard to understand algorithms.Built using React, and D3.js. (Not
+								mobile responsive)
 							</ProjectDescription>
 							<ButtonDiv>
-								<LiveButton href={'https://peaceful-meitner-60541b.netlify.app/'} />
-								<GithubButton href={'https://github.com/jyywong/trip-planner'} />
+								<LiveButton href={'https://romantic-kepler-0dfb7a.netlify.app/'} target="_blank" />
+								<GithubButton href={'https://github.com/jyywong/algo-vis'} />
 							</ButtonDiv>
 						</MainContainer>
 
 						{hasMounted &&
 						!laptopMatch && (
-							<React.Fragment>
-								<ImageContainerContainer>
-									<ImageContainer>
-										<StaticImage src="../images/TripPlannerLaptop.png" alt="website" />
-									</ImageContainer>
-								</ImageContainerContainer>
-							</React.Fragment>
+							<ImageContainerContainer>
+								<ImageContainer>
+									<StaticImage src="../images/algoVisPort.png" alt="website" />
+								</ImageContainer>
+							</ImageContainerContainer>
 						)}
 					</DescriptionDiv>
 					{hasMounted &&
 					laptopMatch && (
 						<PolygonContainer>
 							<ImageContainer>
-								<StaticImage src="../images/TripPlannerLaptop.png" alt="website" />
+								<StaticImage src="../images/algoVisPort.png" alt="website" />
 							</ImageContainer>
 						</PolygonContainer>
 					)}
@@ -425,9 +427,9 @@ const Project1Details = () => {
 								<FeaturesContainer>
 									<SubHeading>What can the user do?</SubHeading>
 									<SubDescription>
-										Users can add events to a trip. Users can also suggest an event where members of
-										the trip can vote on whether or not to add it to the trip. Users can also
-										suggest an alternative to an already existing event.
+										Users can visualize both pathfinding and sorting algorithms. Sorting algorithms
+										include Bubble Sort, Insertion Sort, Merge Sort, and Quick Sort. Pathfinding
+										algorithms include Djikstra's Algorithm, A*, and Greedy Best First Search.
 									</SubDescription>
 								</FeaturesContainer>
 							</Features>
@@ -435,10 +437,10 @@ const Project1Details = () => {
 								<FeaturesContainer>
 									<SubHeading>What did I learn?</SubHeading>
 									<SubDescription>
-										The purpose of this project was to solidify my understanding of Redux and Framer
-										Motion. With this project I learned to use RTK-Query to integrate the API calls
-										with the redux store. I also soldified my understanding of CSS grid and making
-										smooth animations with Framer Motion.
+										With this project I delved into D3.js and learned the data binding model of D3.
+										I learned the basics of how to enter data into D3 objects and how to animate
+										using transition in D3. Additionally, figuring out how to animate these
+										algorithms helped me to understand these algorithms on a deeper level.
 									</SubDescription>
 								</FeaturesContainer>
 							</Features>
@@ -448,10 +450,7 @@ const Project1Details = () => {
 						<TechHeading>Technologies used</TechHeading>
 						<TechContainer>
 							<TechItem>React</TechItem>
-							<TechItem>Redux</TechItem>
-							<TechItem>RTK</TechItem>
-							<TechItem>Material UI</TechItem>
-							<TechItem>Framer Motion</TechItem>
+							<TechItem>D3.js</TechItem>
 						</TechContainer>
 					</Technologies>
 				</SeperatorDiv>
@@ -460,4 +459,4 @@ const Project1Details = () => {
 	);
 };
 
-export default Project1Details;
+export default Project4Details;
