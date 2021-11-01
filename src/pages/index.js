@@ -15,6 +15,7 @@ import Contact from '../components/Contact';
 import Navbar from '../components/Navbar';
 import ProjectDetails from '../components/ProjectDetails';
 import Project3 from '../components/Project3';
+import Project4 from '../components/Project4';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -54,11 +55,13 @@ const IndexPage = () => {
 	const project1Ref = useRef();
 	const project2Ref = useRef();
 	const project3Ref = useRef();
+	const project4Ref = useRef();
 	const contactRef = useRef();
 	const [ skillsAnimate, setSkillsAnimate ] = useState(false);
 	const [ project1Animate, setProject1Animate ] = useState(false);
 	const [ project2Animate, setProject2Animate ] = useState(false);
 	const [ project3Animate, setProject3Animate ] = useState(false);
+	const [ project4Animate, setProject4Animate ] = useState(false);
 
 	const handleBackToTop = () => {
 		heroRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -67,7 +70,7 @@ const IndexPage = () => {
 		skillsRef.current.scrollIntoView({ behavior: 'smooth' });
 	};
 	const handleViewWork = () => {
-		project1Ref.current.scrollIntoView({ behavior: 'smooth' });
+		project4Ref.current.scrollIntoView({ behavior: 'smooth' });
 	};
 	const handleViewContact = () => {
 		contactRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -129,6 +132,14 @@ const IndexPage = () => {
 				setProject3Animate(true);
 			}
 		});
+		ScrollTrigger.create({
+			trigger: '.Project4',
+			start: 'top center',
+			id: 'project4',
+			onEnter: () => {
+				setProject4Animate(true);
+			}
+		});
 	}, []);
 
 	useEffect(
@@ -162,9 +173,11 @@ const IndexPage = () => {
 					/>
 					<Hero ref={heroRef} handleViewWork={handleViewWork} />
 					<Skills ref={skillsRef} skillsAnimate={skillsAnimate} />
+
 					<Project1 ref={project1Ref} project1Animate={project1Animate} />
 					<Project2 ref={project2Ref} project2Animate={project2Animate} />
 					<Project3 ref={project3Ref} project3Animate={project3Animate} />
+					<Project4 ref={project4Ref} project4Animate={project4Animate} />
 					<Contact ref={contactRef} handleBackToTop={handleBackToTop} />
 					{/* <ProjectDetails /> */}
 				</ScrollContainer>

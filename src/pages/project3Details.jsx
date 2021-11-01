@@ -399,7 +399,7 @@ const Project1Details = () => {
 								Bootstrap.
 							</ProjectDescription>
 							<ButtonDiv>
-								<LiveButton />
+								<LiveButton href={'https://blissful-poincare-9e51ea.netlify.app/'} target="_blank" />
 								<GithubButton href={'https://github.com/jyywong/trip-planner'} />
 							</ButtonDiv>
 						</MainContainer>

@@ -414,8 +414,8 @@ const Project3 = forwardRef(({ project3Animate }, ref) => {
 						Textbook Auction
 					</ProjectTitle>
 					<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
-						A web app to help students sell and buy used textbooks. <br />Built using React, and Bootstrap.{' '}
-						<br />
+						A web app to help students sell and buy used textbooks. <br />Built using React, Bootstrap and
+						Django. <br />
 						<br />
 						<StyledLink to="/project3Details">
 							<MoreDetails

@@ -395,7 +395,7 @@ const Project1Details = () => {
 								Built using React, Redux, Chakra UI.
 							</ProjectDescription>
 							<ButtonDiv>
-								<LiveButton />
+								<LiveButton href={'https://quirky-mahavira-f43b02.netlify.app/'} target="_blank" />
 								<GithubButton href={'https://github.com/jyywong/trip-planner'} />
 							</ButtonDiv>
 						</MainContainer>

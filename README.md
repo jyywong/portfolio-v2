@@ -13,7 +13,7 @@ This is my portfolio website, designed to display my projects and other skills.
 - Learned how to animate SVG line animations
 - Learned how to use Matter JS
 - Learned how to use Gatsby and the problems that come with server side rendering
-- Continues to learn how to make responsive websites
+- Continued to learn how to make responsive websites
 
 ## Technologies used
 - Gatsby

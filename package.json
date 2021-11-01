@@ -22,6 +22,7 @@
     "@react-three/fiber": "^7.0.6",
     "axios": "^0.21.4",
     "babel-plugin-styled-components": "^1.13.2",
+    "d3": "^7.1.1",
     "framer-motion": "^4.1.17",
     "gatsby": "^3.13.0",
     "gatsby-plugin-html-attributes": "^1.0.5",

@@ -517,7 +517,8 @@ const Project2 = forwardRef(({ project2Animate }, ref) => {
 					</ProjectTitle>
 					<ProjectDescription animate={controlDescription} initial={{ opacity: 0 }}>
 						A web app to help laboratories keep track of their inventory. <br /> Built using React, Redux,
-						Chakra UI. <br />
+						Chakra UI and Django. <br /> (Try clicking around in this section!)
+						<br />
 						<br />
 						<StyledLink to="/project2Details">
 							<MoreDetails

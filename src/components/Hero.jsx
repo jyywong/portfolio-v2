@@ -93,7 +93,7 @@ const Hero = forwardRef(({ handleViewWork }, ref) => {
 			<Background ref={ref}>
 				<AnimatePresence>{showModal && <Modal setShowModal={setShowModal} />}</AnimatePresence>
 				<HeroText>
-					Hello, I'm <NameSpan>Jonathan Wong</NameSpan> <br /> a front-end developer
+					Hello, I'm <NameSpan>Jonathan Wong</NameSpan> <br /> a full-stack developer
 				</HeroText>
 				<ButtonContainer>
 					<Button
@@ -113,7 +113,7 @@ const Hero = forwardRef(({ handleViewWork }, ref) => {
 							setShowModal(true);
 						}}
 					>
-						Alt Experience
+						3D Experience
 					</AltButton>
 				</ButtonContainer>
 			</Background>
